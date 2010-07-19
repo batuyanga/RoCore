@@ -203,7 +203,7 @@ int Master::Run()
     BigNumber seed1;
     seed1.SetRand(16 * 8);
 
-    sLog.outString( "%s (core-daemon)", "TrinityCore Custom Revision:" REVISION_NR);
+    sLog.outString( "%s (core-daemon)", "TrinityCore Custom Revision: " REVISION_NR);
     sLog.outString( "<Ctrl-C> to stop.\n" );
 
     sLog.outString( " ______                       __");

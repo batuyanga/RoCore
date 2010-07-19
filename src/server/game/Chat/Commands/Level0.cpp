@@ -105,7 +105,7 @@ bool ChatHandler::HandleServerInfoCommand(const char* /*args*/)
 
 //    PSendSysMessage(_FULLVERSION);
     PSendSysMessage("Created For Romanian Best Private Server: www.wow-romania.ro");
-    PSendSysMessage("Core Revision:" REVISION_NR);
+    PSendSysMessage("Core Revision: " REVISION_NR);
     PSendSysMessage(LANG_CONNECTED_PLAYERS, PlayersNum, MaxPlayersNum);
     PSendSysMessage(LANG_CONNECTED_USERS, activeClientsNum, maxActiveClientsNum, queuedClientsNum, maxQueuedClientsNum);
     PSendSysMessage(LANG_UPTIME, uptime.c_str());
