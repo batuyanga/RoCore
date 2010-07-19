@@ -1,0 +1,30 @@
+# use glob syntax.
+syntax: glob
+
+CMakeFiles/
+build/
+src/server/shared/revision.h
+build/
+bin/
+.directory
+*.orig
+*.rej
+*~
+.git/
+.hg/
+win/VC90/*/
+*.ncb
+*.suo
+src/tools/map_extractor/VC90/*/
+src/tools/vmap3_assembler/VC90/*/
+src/tools/vmap3_extractor/VC90/*/
+#externals/lib/*/
+*.*-*
+*.patch
+.hgignore
+.hgtags
+
+# use regexp syntax.
+syntax: regexp
+
+^src/shared/server/shared/revision\.h
