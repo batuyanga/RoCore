@@ -14,13 +14,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-/* ScriptData
-SDName: Trial Of the crusader
-SD%Complete: 60%
-SDComment: event script by /dev/rsa
-SDCategory: trial_of_the_crusader
-EndScriptData */
-
 #include "ScriptPCH.h"
 #include "trial_of_the_crusader.h"
 

@@ -17,13 +17,6 @@
 // Snakes - Underground phase not worked, timers need correct
 // Icehowl - Trample&Crash event not implemented, timers need correct
 
-/* ScriptData
-SDName: northrend_beasts
-SD%Complete: 90%
-SDComment: by /dev/rsa
-SDCategory:
-EndScriptData */
-
 #include "ScriptPCH.h"
 #include "trial_of_the_crusader.h"
 

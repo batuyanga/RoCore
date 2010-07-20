@@ -14,27 +14,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-/* ScriptData
-SDName: trial_of_the_crusader
-SD%Complete: 0
-SDComment: by /dev/rsa
-SDCategory: Crusader Coliseum
-EndScriptData */
-
-/* SQL Start
--- Twin Val'kyr
-UPDATE `creature_template` SET `AIName`='', `ScriptName`='boss_eydis' WHERE `entry`=34496;
-UPDATE `creature_template` SET `AIName`='', `ScriptName`='boss_fjola' WHERE `entry`=34497;
-
-UPDATE `creature_template` SET `AIName`='', `ScriptName`='cr_dark_essence' WHERE `entry`=34567;
-UPDATE `creature_template` SET `AIName`='', `ScriptName`='cr_light_essence' WHERE `entry`=34568;
-
-UPDATE `creature_template` SET `AIName`='', `ScriptName`='mob_valkyr_orb' WHERE `entry` IN (34628, 34630);
-UPDATE `creature_template` SET unit_flags= 33554434, faction_A =14, faction_H=14 WHERE `entry` IN (34628, 34630);
-INSERT INTO npc_spellclick_spells VALUES (34567, 65684, 0, 0, 0, 1, 0, 0, 0), (34568, 65686, 0, 0, 0, 1, 0, 0, 0); -- dark/light "portals"
-INSERT INTO spell_script_target values (65875, 1, 34497), (65876, 1, 34496);
-SQL End */
-
 #include "ScriptPCH.h"
 #include "trial_of_the_crusader.h"
 

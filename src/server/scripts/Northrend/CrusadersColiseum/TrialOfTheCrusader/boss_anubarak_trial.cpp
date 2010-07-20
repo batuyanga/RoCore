@@ -14,26 +14,18 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-/* ScriptData
-SDName: boss_anubarak_trial
-SD%Complete: 70%
-SDComment: by /dev/rsa
-SDCategory:
-EndScriptData */
-
-
 #include "ScriptPCH.h"
 #include "trial_of_the_crusader.h"
 
 enum Yells
 {
-        SAY_AGGRO               =       -1713555,               //This place will serve as your tomb!
-        SAY_SUBMERGE            =       -1713556,               //Auum na-l ak-k-k-k, isshhh. Rise, minions. Devour...
-        SAY_LEECHING_SWARM      =       -1713557,               //The swarm shall overtake you!
-        SAY_KILL_1              =       -1713558,               //F-lakkh shir!
-        SAY_KILL_2              =       -1713559,               //Another soul to sate the host.
-        SAY_DEATH               =       -1713560,               //I have failed you, master...
-        SAY_OUTRO               =       -1713561,               //Highlord Tirion Fordring yells: Champions, you're alive! Not only have you defeated every challenge of the Trial of the Crusader, but thwarted Arthas directly! Your skill and cunning will prove to be a powerful weapon against the Scourge. Well done! Allow one of my mages to transport you back to the surface!
+        SAY_AGGRO               =       -1713555,
+        SAY_SUBMERGE            =       -1713556,
+        SAY_LEECHING_SWARM      =       -1713557,
+        SAY_KILL_1              =       -1713558,
+        SAY_KILL_2              =       -1713559,
+        SAY_DEATH               =       -1713560,
+        SAY_OUTRO               =       -1713561,
 };
 
 enum AnubarakSpells
@@ -48,12 +40,12 @@ enum AnubarakSpells
         SPELL_IMPALE_25                         =       67860,
         SPELL_SUMMON_SCARAB                     =       66340,
         SPELL_LEECHING_SWARM                    =       67630,
-        SPELL_IMPALE_TRIGGER                    =       65921, //visual chase
+        SPELL_IMPALE_TRIGGER                    =       65921,
         SPELL_IMPALE_RANGE                      =       65922,
         SPELL_BERSERK                           =       26662,
         SPELL_PERMAFROST                         =         66193,
-        SPELL_IMPALE_FAIL                        =        66181, //impale fail
-        SPELL_IMPALE_WIN                        =        69184, //impale win
+        SPELL_IMPALE_FAIL                        =        66181,
+        SPELL_IMPALE_WIN                        =        69184,
 
 };
 

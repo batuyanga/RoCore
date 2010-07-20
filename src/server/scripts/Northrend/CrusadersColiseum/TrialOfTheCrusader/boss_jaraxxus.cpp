@@ -16,13 +16,6 @@
 // Jaraxxus - Magic aura (from start?) not fully offlike implemented.
 // Legion flame visual effect not imlemented
 
-/* ScriptData
-SDName: trial_of_the_crusader
-SD%Complete: 80%
-SDComment: by /dev/rsa
-SDCategory: Crusader Coliseum
-EndScriptData */
-
 #include "ScriptPCH.h"
 #include "trial_of_the_crusader.h"
 
