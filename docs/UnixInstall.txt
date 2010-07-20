@@ -9,7 +9,7 @@ you have all required applications
 
 The most important ones are:
 
-	g++
+    g++
     gcc
     make
     cmake version 2.6.x or greater
@@ -32,9 +32,16 @@ Make a directory to build in, you can call it anything you want like build or bi
 the directory and cmake and make. E.G. you created a dir named build ad want to have your final
  compiled product installed in /home/trinity/server, an example sequence of commands can be : 
 
-    cmake /root/wow/ -DPREFIX=/opt/trinity -DDO_DEBUG=1 -DCMAKE_C_FLAGS="-m32 -D_LARGEFILE_SOURCE -DFD_SETSIZE=131072 -march=prescott -ggdb3 -g3 -pipe -fno-strength-reduce -fno-delete-null-pointer-checks -fno-strict-aliasing -frename-registers"
+    git clone git://github.com/myh/RoCore.git
+    cd RoCore
+    mkdir build
+    cd build
+    cmake ../wow/ -DPREFIX=/opt/trinity -DDO_DEBUG=1 -DCMAKE_C_FLAGS="-m32 -D_LARGEFILE_SOURCE -DFD_SETSIZE=131072 -march=prescott -ggdb3 -g3 -pipe -fno-strength-reduce -fno-delete-null-pointer-checks -fno-strict-aliasing -frename-registers"
     make
     make install
+    cd /opt/trinity/bin
+    ./authserver
+    ./worldserver
     
 Thats just about all thats needed. You can however tweak more settings than where to install using flags built into our cmake files. Just open up CMakeLists.txt in the main folder and take a look at some of the flags like 
 
