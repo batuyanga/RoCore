@@ -1806,6 +1806,36 @@ bool ChatHandler::HandleSetSkillCommand(const char *args)
     return true;
 }
 
+bool ChatHandler::HandleAddAchieveCommand(const char *args)
+{
+    if (!*args)
+        return false;
+
+	uint32 achieve_id = atoi((char*)args);
+	if (!achieve_id)
+	{
+		char* cId = extractKeyFromLink((char*)args,"Hachievement");
+		if (!cId)
+			return false;
+		achieve_id = atoi(cId);
+		if (!achieve_id)
+			return false;
+	}
+
+    Player* target = getSelectedPlayer();
+    if (!target)
+    {
+        SendSysMessage(LANG_NO_CHAR_SELECTED);
+        SetSentErrorMessage(true);
+        return false;
+    }
+
+	if (AchievementEntry const* AE = GetAchievementStore()->LookupEntry(achieve_id))
+		target->CompletedAchievement(AE, true);
+
+	return true;
+}
+
 bool ChatHandler::HandleUnLearnCommand(const char *args)
 {
     if (!*args)

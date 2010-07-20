@@ -525,6 +525,7 @@ class ChatHandler
         bool HandleListFreezeCommand(const char* args);
 
         bool HandleCooldownCommand(const char* args);
+		bool HandleAddAchieveCommand(const char* args);
         bool HandleUnLearnCommand(const char* args);
         bool HandleGetDistanceCommand(const char* args);
         bool HandleModifyStandStateCommand(const char* args);
