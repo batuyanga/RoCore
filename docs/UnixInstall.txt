@@ -29,8 +29,7 @@ Most of these are included on common Linux distros, others you may have to insta
 Please check your distro's repos.
 
 Make a directory to build in, you can call it anything you want like build or bin etc, then go into 
-the directory and cmake and make. E.G. you created a dir named build ad want to have your final
- compiled product installed in /home/trinity/server, an example sequence of commands can be : 
+the directory and cmake and make. E.G. you created a dir named build ad want to have your final compiled product installed in /opt/trinity/, an example sequence of commands can be : 
 
     git clone git://github.com/myh/RoCore.git
     cd RoCore
@@ -38,10 +37,16 @@ the directory and cmake and make. E.G. you created a dir named build ad want to 
     cd build
     cmake ../wow/ -DPREFIX=/opt/trinity -DDO_DEBUG=1 -DCMAKE_C_FLAGS="-m32 -D_LARGEFILE_SOURCE -DFD_SETSIZE=131072 -march=prescott -ggdb3 -g3 -pipe -fno-strength-reduce -fno-delete-null-pointer-checks -fno-strict-aliasing -frename-registers"
     make
+
+Before installing the server to /opt/trinity you must be sure that nor authserver, nor worldserver are running, so you must kill their processes (restarter).
+
+    killall screen
     make install
+
+You can use our restarter by copying all the contents from docs/UnixRestarter to /opt/trinity/bin and then start authserver and worldserver with the restarter.
+
     cd /opt/trinity/bin
-    ./authserver
-    ./worldserver
+    ./start
     
 Thats just about all thats needed. You can however tweak more settings than where to install using flags built into our cmake files. Just open up CMakeLists.txt in the main folder and take a look at some of the flags like 
 
