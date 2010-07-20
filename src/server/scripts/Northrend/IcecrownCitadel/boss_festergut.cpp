@@ -31,19 +31,19 @@ enum Yells
     SAY_KILL_2              =    -1666011,
     SAY_BERSERK             =    -1666012,
     SAY_DEATH_1             =    -1666013,
-    SAY_DEATH_2             =    -1666014, 
+    SAY_DEATH_2             =    -1666014,
 };
 
 enum Spells
 {
-    SPELL_PUNGENT_BLIGHT       =    69195, 
-    SPELL_GASTRIC_EXPLOSION    =    72227, 
+    SPELL_PUNGENT_BLIGHT       =    69195,
+    SPELL_GASTRIC_EXPLOSION    =    72227,
     SPELL_INHALE_BLIGHT        =    69165,
     SPELL_VILE_GAS             =    72272,
     SPELL_GASTRIC_BLOAT        =    72219,
     SPELL_GAS_VISUAL_SMAL      =    69154,
     SPELL_GAS_VISUAL_MIDDEL    =    69152,
-    SPELL_GAS_VISUAL_BIG       =    69126, 
+    SPELL_GAS_VISUAL_BIG       =    69126,
     SPELL_GAS_SPORES           =    69278,
     SPELL_BERSERK              =    47008,
     SPELL_INOCULATED           =    72103,
@@ -99,7 +99,7 @@ struct boss_festergutAI : public ScriptedAI
     }
 
     void JustDied(Unit* pKiller)
-    {  
+    {
         DoScriptText(SAY_DEATH_1, me);
 
         if (m_pInstance)
@@ -109,7 +109,7 @@ struct boss_festergutAI : public ScriptedAI
     void JustReachedHome()
     {
         if(m_pInstance)
-            m_pInstance->SetData(DATA_FESTERGURT_EVENT, FAIL);  
+            m_pInstance->SetData(DATA_FESTERGURT_EVENT, FAIL);
     }
 
     void KilledUnit(Unit *victim)

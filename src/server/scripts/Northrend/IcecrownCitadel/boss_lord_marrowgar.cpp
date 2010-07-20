@@ -79,8 +79,8 @@ struct npc_bone_spikeAI : public Scripted_NoMovementAI
     }
 
     void Reset()
-    { 
-        BoneSpikeGUID = 0; 
+    {
+        BoneSpikeGUID = 0;
     }
 
     void JustDied(Unit *killer)
@@ -162,7 +162,7 @@ struct boss_lord_marrowgarAI : public ScriptedAI
     }
 
     void JustDied(Unit* killer)
-    {  
+    {
         DoScriptText(SAY_DEATH, me);
 
         if (pInstance)
@@ -172,7 +172,7 @@ struct boss_lord_marrowgarAI : public ScriptedAI
     void JustReachedHome()
     {
         if(pInstance)
-            pInstance->SetData(DATA_MARROWGAR_EVENT, FAIL);  
+            pInstance->SetData(DATA_MARROWGAR_EVENT, FAIL);
     }
 
     void KilledUnit(Unit *victim)
@@ -210,7 +210,7 @@ struct boss_lord_marrowgarAI : public ScriptedAI
                 if (m_uiBoneSpikeGraveyardTimer < uiDiff)
                 {
                     DoScriptText(RAND(SAY_BONESPIKE_1,SAY_BONESPIKE_2,SAY_BONESPIKE_3), me);
-                    uint32 count = RAID_MODE(1,3,1,3); 
+                    uint32 count = RAID_MODE(1,3,1,3);
                     for (uint8 i = 1; i <= count; i++)
                     {
                         Unit *pTarget = SelectTarget(SELECT_TARGET_RANDOM, 0, 200, true);
@@ -354,10 +354,10 @@ void AddSC_boss_marrowgar()
     NewScript = new Script;
     NewScript->Name = "npc_cold_flame";
     NewScript->GetAI = &GetAI_npc_cold_flame;
-    NewScript->RegisterSelf();    
+    NewScript->RegisterSelf();
 
     NewScript = new Script;
     NewScript->Name = "npc_bone_spike";
     NewScript->GetAI = &GetAI_npc_bone_spike;
-    NewScript->RegisterSelf();    
+    NewScript->RegisterSelf();
 }

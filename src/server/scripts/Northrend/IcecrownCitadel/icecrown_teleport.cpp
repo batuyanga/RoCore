@@ -72,7 +72,7 @@ bool GoHello_icecrown_teleporter( Player *pPlayer, GameObject *pGO )
     }
 
     if(pInstance->GetData(DATA_VALITHRIA_DREAMWALKER_EVENT) == DONE || pPlayer->isGameMaster())
-    {   
+    {
         pPlayer->ADD_GOSSIP_ITEM(0, "Teleport to The Lair of the Queen of Ice", GOSSIP_SENDER_MAIN, QUEEN);
     }
     if(pInstance->GetData(DATA_SINDRAGOSA_EVENT) == DONE || pPlayer->isGameMaster())
@@ -140,12 +140,12 @@ bool GOSelect_icecrown_teleporter( Player *pPlayer, GameObject *pGO, uint32 send
 
     case QUEEN:
         pPlayer->TeleportTo(631, 4356.580, 2565.75, 220.40, 4.886216);
-        pPlayer->CLOSE_GOSSIP_MENU(); 
+        pPlayer->CLOSE_GOSSIP_MENU();
         break;
 
     case LICHKING:
         pPlayer->TeleportTo(631, 529.3969, -2124.879883, 1041.86f, 0.120937);
-        pPlayer->CLOSE_GOSSIP_MENU(); 
+        pPlayer->CLOSE_GOSSIP_MENU();
         break;
     }
 

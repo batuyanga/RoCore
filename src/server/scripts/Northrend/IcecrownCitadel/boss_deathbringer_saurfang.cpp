@@ -171,7 +171,7 @@ struct boss_saurfangAI : public ScriptedAI
 
     void JustSummoned(Creature *pSummoned)
     {
-        Unit* pTarget = SelectTarget(SELECT_TARGET_FARTHEST, 0); 
+        Unit* pTarget = SelectTarget(SELECT_TARGET_FARTHEST, 0);
         pSummoned->AddThreat(pTarget, 500000.0f);
         pSummoned->GetMotionMaster()->MoveChase(pTarget);
     }
@@ -181,7 +181,7 @@ struct boss_saurfangAI : public ScriptedAI
         if(!UpdateVictim())
             return;
 
-        if (!m_pInstance || m_pInstance->GetData(DATA_SAURFANG_EVENT) != IN_PROGRESS) 
+        if (!m_pInstance || m_pInstance->GetData(DATA_SAURFANG_EVENT) != IN_PROGRESS)
         {
             Map::PlayerList const &PlList = me->GetMap()->GetPlayers();
 
@@ -254,7 +254,7 @@ struct boss_saurfangAI : public ScriptedAI
         if (m_uiBerserkTimer < uiDiff)
         {
             DoCast(SPELL_BERSERK);
-			DoScriptText(SAY_BERSERK, me);
+            DoScriptText(SAY_BERSERK, me);
             m_uiBerserkTimer = 480000;
         } else m_uiBerserkTimer -= uiDiff;
 
@@ -290,7 +290,7 @@ struct npc_bloodbeastAI : public ScriptedAI
     }
 
     void KilledUnit(Unit* pVictim)
-    { 
+    {
         if (Creature* Saurfang = me->GetCreature(*me, m_pInstance->GetData64(DATA_SAURFANG)))
         {
             Saurfang->ModifyHealth(Saurfang->GetMaxHealth() * 0.01);
@@ -302,7 +302,7 @@ struct npc_bloodbeastAI : public ScriptedAI
         if(!UpdateVictim())
             return;
 
-        if (!m_pInstance || m_pInstance->GetData(DATA_SAURFANG_EVENT) != IN_PROGRESS) 
+        if (!m_pInstance || m_pInstance->GetData(DATA_SAURFANG_EVENT) != IN_PROGRESS)
             me->ForcedDespawn();
 
      if (getDifficulty() == RAID_DIFFICULTY_10MAN_HEROIC || getDifficulty() == RAID_DIFFICULTY_25MAN_HEROIC)
@@ -317,7 +317,7 @@ struct npc_bloodbeastAI : public ScriptedAI
                 m_uiScentOfBloodTimer = 9000;
             }
         } else m_uiScentOfBloodTimer -= uiDiff;
-	 }
+     }
 
         DoMeleeAttackIfReady();
     }

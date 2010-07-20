@@ -19,7 +19,7 @@
 
 /* ScriptData
 SDName: northrend_beasts
-SD%Complete: 90% 
+SD%Complete: 90%
 SDComment: by /dev/rsa
 SDCategory:
 EndScriptData */

@@ -36,7 +36,7 @@ struct instance_icecrown_citadel : public ScriptedInstance
     uint64 uiRotface;
     uint64 uiProfessorPutricide;
     uint64 uiPrinceValanar;
-    uint64 uiPrinceKeleseth;    
+    uint64 uiPrinceKeleseth;
     uint64 uiPrinceTaldaram;
     uint64 uiBloodQueenLanathel;
     uint64 uiValithriaDreamwalker;
@@ -76,7 +76,7 @@ struct instance_icecrown_citadel : public ScriptedInstance
     uint64 uiRoostDoor2;
     uint64 uiRoostDoor3;
     uint64 uiRoostDoor4;
-    uint64 m_uiDreamwalkerCacheGUID; 
+    uint64 m_uiDreamwalkerCacheGUID;
     uint64 uiSindragosaDoor1;
     uint64 uiSindragosaDoor2;
     uint64 uiFirstTp;
@@ -101,7 +101,7 @@ struct instance_icecrown_citadel : public ScriptedInstance
         uiRotface               = 0;
         uiProfessorPutricide    = 0;
         uiPrinceValanar         = 0;
-        uiPrinceKeleseth        = 0;    
+        uiPrinceKeleseth        = 0;
         uiPrinceTaldaram        = 0;
         uiBloodQueenLanathel    = 0;
         uiValithriaDreamwalker  = 0;
@@ -322,9 +322,9 @@ struct instance_icecrown_citadel : public ScriptedInstance
                 HandleGameObject(NULL,false,pGo);
             break;
         case 202244:
-            uiFlightWarTp = pGo->GetGUID(); 
+            uiFlightWarTp = pGo->GetGUID();
             if (auiEncounter[2] == NOT_STARTED)
-                HandleGameObject(NULL,false,pGo);			
+                HandleGameObject(NULL,false,pGo);
             break;
         case 202245:
             uiSaurfangTp = pGo->GetGUID();
@@ -334,7 +334,7 @@ struct instance_icecrown_citadel : public ScriptedInstance
         case 202235:
             uiCitadelTp = pGo->GetGUID();
             if (auiEncounter[4] == NOT_STARTED)
-                HandleGameObject(NULL,false,pGo);			
+                HandleGameObject(NULL,false,pGo);
             break;
         case 202246:
             uiSindragossaTp = pGo->GetGUID();
@@ -482,7 +482,7 @@ struct instance_icecrown_citadel : public ScriptedInstance
             {
             case DONE:
                 if (GameObject* pChest = instance->GetGameObject(m_uiSaurfangCacheGUID))
-                    if (pChest && !pChest->isSpawned()) 
+                    if (pChest && !pChest->isSpawned())
                     {
                         pChest->SetRespawnTime(pChest->GetRespawnDelay());
                     }
@@ -621,7 +621,7 @@ struct instance_icecrown_citadel : public ScriptedInstance
             {
             case DONE:
                 if (GameObject* pChest = instance->GetGameObject(m_uiDreamwalkerCacheGUID))
-                    if (pChest && !pChest->isSpawned()) 
+                    if (pChest && !pChest->isSpawned())
                     {
                         pChest->SetRespawnTime(pChest->GetRespawnDelay());
                     }
@@ -662,7 +662,7 @@ struct instance_icecrown_citadel : public ScriptedInstance
                     HandleGameObject(uiRoostDoor3,true);
                     HandleGameObject(uiRoostDoor4,true);
                     break;
-				}
+                }
             }
             auiEncounter[9] = data;
             break;
@@ -731,7 +731,7 @@ struct instance_icecrown_citadel : public ScriptedInstance
         OUT_SAVE_INST_DATA;
 
         std::ostringstream saveStream;
-        saveStream << "I C" << auiEncounter[0] << " " << auiEncounter[1] << " " << auiEncounter[2] << " " << auiEncounter[3] 
+        saveStream << "I C" << auiEncounter[0] << " " << auiEncounter[1] << " " << auiEncounter[2] << " " << auiEncounter[3]
         << " " << auiEncounter[4] << " " << auiEncounter[5] << " " << auiEncounter[6] << " " << auiEncounter[7] << " " << auiEncounter[8]
         << " " << auiEncounter[9] << " " << auiEncounter[10] << " " << auiEncounter[11];
 

@@ -169,7 +169,7 @@ struct boss_fjolaAI : public ScriptedAI
     uint32 SpecialAbilityTimer;
 
     float summX, summY, summZ;
-	
+
     void Reset()
     {
         OrbTimer = 5000;
@@ -177,8 +177,8 @@ struct boss_fjolaAI : public ScriptedAI
         SpecialAbilityTimer = 60000;
         SpikeTimer = 15000;
         mDarkbaneGUID = 0;
-				if (me->isAlive()) me->SummonCreature(CR_LIGHT_ESSENCE, LightPos1, TEMPSUMMON_MANUAL_DESPAWN, 5000);
-				if (me->isAlive()) me->SummonCreature(CR_LIGHT_ESSENCE, LightPos2, TEMPSUMMON_MANUAL_DESPAWN, 5000);
+                if (me->isAlive()) me->SummonCreature(CR_LIGHT_ESSENCE, LightPos1, TEMPSUMMON_MANUAL_DESPAWN, 5000);
+                if (me->isAlive()) me->SummonCreature(CR_LIGHT_ESSENCE, LightPos2, TEMPSUMMON_MANUAL_DESPAWN, 5000);
     }
 
     void EnterCombat(Unit* pWho)
@@ -340,8 +340,8 @@ struct boss_eydisAI : public ScriptedAI
         SpecialAbilityTimer = 30000;
         SpikeTimer = 15000;
         mLightbaneGUID = 0;
-				if (me->isAlive()) me->SummonCreature(CR_DARK_ESSENCE, DarkPos1, TEMPSUMMON_MANUAL_DESPAWN, 5000);
-				if (me->isAlive()) me->SummonCreature(CR_DARK_ESSENCE, DarkPos2, TEMPSUMMON_MANUAL_DESPAWN, 5000);
+                if (me->isAlive()) me->SummonCreature(CR_DARK_ESSENCE, DarkPos1, TEMPSUMMON_MANUAL_DESPAWN, 5000);
+                if (me->isAlive()) me->SummonCreature(CR_DARK_ESSENCE, DarkPos2, TEMPSUMMON_MANUAL_DESPAWN, 5000);
     }
 
     void EnterCombat(Unit* pWho)
@@ -538,19 +538,19 @@ struct cr_dark_essenceAI : public ScriptedAI
     }
 
     ScriptedInstance* m_pInstance;
-	
-	void UpdateAI(const uint32 uiDiff)
+
+    void UpdateAI(const uint32 uiDiff)
     {
-		/*if (!pFjola->isAlive()) 
-			me->ForcedDespawn();
-		Map* pMap = me->GetMap();
+        /*if (!pFjola->isAlive())
+            me->ForcedDespawn();
+        Map* pMap = me->GetMap();
         Map::PlayerList const &PlayerList = pMap->GetPlayers();
         for (Map::PlayerList::const_iterator i = PlayerList.begin(); i != PlayerList.end(); ++i)
             if (Player* i_pl = i->getSource())
                 if (i_pl->isAlive() && i_pl->HasAura(SP_LIGHT_ESSENCE))
-					i_pl->RemoveAurasDueToSpell(SP_LIGHT_ESSENCE);*/
-	}
-	
+                    i_pl->RemoveAurasDueToSpell(SP_LIGHT_ESSENCE);*/
+    }
+
 };
 
 struct cr_light_essenceAI : public ScriptedAI
@@ -561,19 +561,19 @@ struct cr_light_essenceAI : public ScriptedAI
     }
 
     ScriptedInstance* m_pInstance;
-	
-	void UpdateAI(const uint32 uiDiff)
+
+    void UpdateAI(const uint32 uiDiff)
     {
-		/*if (!pEydis->isAlive()) 
-			me->ForcedDespawn();
-		Map* pMap = me->GetMap();
+        /*if (!pEydis->isAlive())
+            me->ForcedDespawn();
+        Map* pMap = me->GetMap();
         Map::PlayerList const &PlayerList = pMap->GetPlayers();
         for (Map::PlayerList::const_iterator i = PlayerList.begin(); i != PlayerList.end(); ++i)
             if (Player* i_pl = i->getSource())
                 if (i_pl->isAlive() && i_pl->HasAura(SP_LIGHT_ESSENCE))
-					i_pl->RemoveAurasDueToSpell(SP_LIGHT_ESSENCE);*/
-	}
-	
+                    i_pl->RemoveAurasDueToSpell(SP_LIGHT_ESSENCE);*/
+    }
+
 };
 
 CreatureAI* GetAI_mob_valkyr_orb(Creature *pCreature)
@@ -609,13 +609,13 @@ void AddSC_twin_valkyr()
     newscript->Name = "mob_valkyr_orb";
     newscript->GetAI = &GetAI_mob_valkyr_orb;
     newscript->RegisterSelf();
-	
-	newscript = new Script;
+
+    newscript = new Script;
     newscript->Name = "cr_dark_essence";
     newscript->GetAI = &GetAI_cr_dark_essence;
     newscript->RegisterSelf();
-	
-	newscript = new Script;
+
+    newscript = new Script;
     newscript->Name = "cr_light_essence";
     newscript->GetAI = &GetAI_cr_light_essence;
     newscript->RegisterSelf();

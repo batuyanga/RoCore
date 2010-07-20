@@ -21,7 +21,7 @@
 enum Yells
 {
     SAY_AGGRO              =    -1666054,
-    SAY_VAMP_BITE_1        =    -1666055,    
+    SAY_VAMP_BITE_1        =    -1666055,
     SAY_VAMP_BITE_2        =    -1666056,
     SAY_SWARM_SHADOWS      =    -1666057,
     SAY_PACT_DARKFALLEN    =    -1666058,
@@ -38,17 +38,17 @@ enum BloodQuennSpells
     SPELL_BLOOD_MIRROR_1                =    70821,
     SPELL_BLOOD_MIRROR_2                =    71510,
     SPELL_VAMPIRIC_BITE                 =    71726,
-    SPELL_PACT_OF_THE_DARKFALLEN_1      =    71340, 
-    SPELL_PACT_OF_THE_DARKFALLEN_2      =    71341, 
+    SPELL_PACT_OF_THE_DARKFALLEN_1      =    71340,
+    SPELL_PACT_OF_THE_DARKFALLEN_2      =    71341,
     SPELL_SWARMING_SHADOWS              =    71264,
-    SPELL_TWILIGHT_BLOODBOLT            =    71446, 
+    SPELL_TWILIGHT_BLOODBOLT            =    71446,
     SPELL_BLOODBOLD_WHIRL               =    71772,
     SPELL_BLOODBOLD_SPLASH              =    71481,
     SPELL_BERSERK                       =    47008,
     SPELL_INCITE_TERROR                 =    73070,
     SPELL_SWARMING_SHADOWS_VISUAL       =    71267,
     SPELL_SWARMING_SHADOW_10_NORMAL     =    71267,
-    SPELL_SWARMING_SHADOW_25_NORMAL     =    72635,    
+    SPELL_SWARMING_SHADOW_25_NORMAL     =    72635,
     SPELL_SWARMING_SHADOW_10_HEROIC     =    72636,
     SPELL_SWARMING_SHADOW_25_HEROIC     =    72637,
 };
@@ -84,7 +84,7 @@ struct boss_blood_queen_lanathelAI : public ScriptedAI
     uint32 m_uiPactofDarkfallenExplodeTimer;
     uint32 m_uiPactofDarkfallenExplosionCount;
     uint32 m_uiPhase;
-    uint32 m_uiBerserkTimer;        
+    uint32 m_uiBerserkTimer;
     uint32 m_uiSetHoverTimer;
     uint32 m_uiLandingTimer;
     uint32 m_uiFlyingFalseTimer;
@@ -175,7 +175,7 @@ struct boss_blood_queen_lanathelAI : public ScriptedAI
             } else m_uiVampBiteTimer -= uiDiff;
 
             if (m_uiPhaseTimer < uiDiff)
-            {    
+            {
                 DoScriptText(SAY_AIR_PHASE, me);
                 DoCast(me, SPELL_INCITE_TERROR);
                 me->GetMotionMaster()->MovePoint(0, Phase2Position);
