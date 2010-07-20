@@ -298,7 +298,7 @@ struct boss_sindragosaAI : public ScriptedAI
     void UnchainedMagic()
     {
         Unit* pTarget = SelectUnit(SELECT_TARGET_RANDOM,0);
-        if (pTarget && !pTarget->HasAura(SPELL_UNCHAINED_MAGIC) && !me->IsWithinDistInMap(pTarget, 5))
+        if (pTarget && !pTarget->HasAura(SPELL_UNCHAINED_MAGIC) && !me->IsWithinDistInMap(pTarget, 5) && pTarget->getPowerType() == POWER_MANA)
         {
             DoCast(pTarget, SPELL_UNCHAINED_MAGIC);
             DoScriptText(SAY_UNCHAINED_MAGIC, me);
