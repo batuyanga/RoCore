@@ -41,6 +41,7 @@ REPLACE INTO script_texts (`entry`, `content_default`, `npc_entry`, `content_loc
 ('-1752033', '', '0', 'I am the light and darkness. Tremble mortals before the herald Deathwing!', '17508', '1', '7');
 
 -- Scriptnames
+UPDATE `instance_template` SET `script`='instance_ruby_sanctum' WHERE (`map`='724');
 UPDATE `creature_template` SET `ScriptName` = 'boss_baltharus' WHERE `entry` = '39751';
 UPDATE `creature_template` SET `ScriptName` = 'boss_baltharus_clone' WHERE `entry` = '39899';
 UPDATE `creature_template` SET `ScriptName` = 'npc_xerestrasza' WHERE `entry` = '40429';
