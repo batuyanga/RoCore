@@ -7,10 +7,6 @@ DELETE FROM `script_waypoint` WHERE `entry`=33370;
 DELETE FROM areatrigger_scripts WHERE `entry`=4156;
 INSERT INTO areatrigger_scripts VALUES (4156,'at_naxxramas_frostwyrm_wing');
 
--- Ulduar for CTDB_012 in base of bllodycore scripts
--- thanks bloodycore
--- 7560_leviathan_crashfix
--- Ulduar crash fixes
 UPDATE `instance_template` SET `script`='instance_ulduar' WHERE `map`=603;
 UPDATE `creature_template` SET `ScriptName`='boss_auriaya' WHERE `entry`=33515;
 UPDATE `creature_template` SET `ScriptName`='boss_flame_leviathan' WHERE `entry`=33113;
@@ -1381,8 +1377,6 @@ UPDATE `creature_template` SET `faction_A` = 35, `faction_H` = 35, `npcflag` = 1
 -- 8453_razorscale_yell
 -- razorscale yell fix
 UPDATE `script_texts` SET `content_default` = "Move! Quickly! She won't remain grounded for long.", `type` = 1  WHERE `entry` = -1603261;
-
-
 
 -- script names faltantes
 UPDATE `creature_template` SET `ScriptName` = 'boss_elder_ironbranch' WHERE `entry` =32913;
