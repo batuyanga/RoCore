@@ -60,7 +60,7 @@ char remotes[NUM_REMOTES][MAX_REMOTE] = {
 char remote_branch[MAX_REMOTE] = "master";
 char rev_nr_file[MAX_PATH] = "src/server/shared/revision_nr.h";
 char rev_sql_file[MAX_PATH] = "src/server/shared/revision_sql.h";
-char sql_update_dir[MAX_PATH] = "sql/updates";
+char sql_update_dir[MAX_PATH] = "sql/wow_ro";
 char new_index_file[MAX_PATH] = ".git/git_id_index";
 
 char databases[NUM_DATABASES][MAX_DB] = {
