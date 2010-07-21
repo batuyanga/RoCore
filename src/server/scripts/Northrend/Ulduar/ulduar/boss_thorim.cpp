@@ -176,13 +176,13 @@ enum ThorimChests
 
 const Position Pos[7] =
 {
-{2099.34, -286.61, 419.84, 0.564},
 {2095.53, -279.48, 419.84, 0.504},
-{2093.00, -271.36, 419.84, 0.210},
 {2092.93, -252.96, 419.84, 6.024},
-{2095.21, -246.78, 419.84, 5.925},
-{2098.66, -240.79, 419.84, 5.715},
-{2113.37, -225.85, 419.84, 5.221}
+{2097.86, -240.97, 419.84, 5.643},
+{2113.14, -225.94, 419.84, 5.259},
+{2156.87, -226.12, 419.84, 4.202},
+{2172.42, -242.70, 419.84, 3.583},
+{2171.92, -284.59, 419.84, 2.691}
 };
 
 const Position PosOrbs[7] =
@@ -207,6 +207,10 @@ const Position PosCharge[7] =
 {2123.91, -222.443, 419.573, 4.97419}
 };
 
+#define POS_X_ARENA  2181.19f
+#define POS_Y_ARENA  -299.12f
+
+#define IN_ARENA(who) (who->GetPositionX() < POS_X_ARENA && who->GetPositionY() > POS_Y_ARENA)
 
 struct boss_thorimAI : public BossAI
 {
@@ -330,7 +334,7 @@ struct boss_thorimAI : public BossAI
                 {
                     case EVENT_STORMHAMMER:
                         if (Unit *pTarget = SelectTarget(SELECT_TARGET_RANDOM, 0, 80, true))
-                            if (pTarget->isAlive())
+                            if (pTarget->isAlive() && IN_ARENA(pTarget))
                                 DoCast(pTarget, SPELL_STORMHAMMER);
                         events.ScheduleEvent(EVENT_STORMHAMMER, urand(15000, 20000), 0, PHASE_1);
                         break;
@@ -533,6 +537,8 @@ struct mob_arena_phaseAI : public ScriptedAI
         for (uint8 i = 0; i < 6; ++i)
             if (me->GetEntry() == ARENA_PHASE_ADD[i])
                 id = ArenaAdds(i);
+                
+        IsInArena = IN_ARENA(me);
     }
 
     ArenaAdds id;
@@ -540,6 +546,44 @@ struct mob_arena_phaseAI : public ScriptedAI
     int32 PrimaryTimer;
     int32 SecondaryTimer;
     int32 ChargeTimer;
+    bool IsInArena;
+    
+    bool isOnSameSide(const Unit *pWho)
+    {
+        return (IsInArena == IN_ARENA(pWho));
+    }
+    
+    void DamageTaken(Unit *attacker, uint32 &damage)
+    {
+        if (!isOnSameSide(attacker))
+            damage = 0;
+    }
+    
+    void EnterEvadeMode()
+    {
+        if (!_EnterEvadeMode())
+            return;
+
+        Map* pMap = me->GetMap();
+        if (pMap->IsDungeon())
+        {
+            Map::PlayerList const &PlayerList = pMap->GetPlayers();
+            if (!PlayerList.isEmpty())
+            {
+                for (Map::PlayerList::const_iterator i = PlayerList.begin(); i != PlayerList.end(); ++i)
+                {
+                    if (i->getSource() && i->getSource()->isAlive() && isOnSameSide(i->getSource()))
+                    {
+                        AttackStart(i->getSource());
+                        return;
+                    }
+                }
+            }
+        }
+
+        me->GetMotionMaster()->MoveIdle();
+        Reset();
+    }
 
     void Reset()
     {
@@ -558,8 +602,11 @@ struct mob_arena_phaseAI : public ScriptedAI
     
     void UpdateAI(const uint32 uiDiff)
     {
-        if (!UpdateVictim())
+        if ((!isOnSameSide(me) || me->getVictim() && !isOnSameSide(me->getVictim())))
+        {
+            EnterEvadeMode();
             return;
+        }
             
         if (me->hasUnitState(UNIT_STAT_CASTING))
             return;
@@ -718,6 +765,7 @@ struct mob_rune_giantAI : public ScriptedAI
         me->SummonCreature(32875, 2220.31, -436.22, 412.26, 1.064, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 3000);
         me->SummonCreature(32875, 2158.88, -441.73, 438.25, 0.127, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 3000);
         me->SummonCreature(33110, 2198.29, -436.92, 419.95, 0.261, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 3000);
+        me->SummonCreature(33110, 2230.93, -434.27, 412.26, 1.931, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 3000);
     }
     
     void EnterCombat(Unit* pWho)
