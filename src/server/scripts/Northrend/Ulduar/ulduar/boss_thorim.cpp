@@ -318,9 +318,14 @@ struct boss_thorimAI : public BossAI
     {
         if (!UpdateVictim())
             return;
+        
+        if (phase == PHASE_2 && !IN_ARENA(me))
+        {
+            EnterEvadeMode();
+            return;
+        }
             
         events.Update(diff);
-        
         EncounterTime += diff;
 
         if (me->hasUnitState(UNIT_STAT_CASTING))
@@ -561,9 +566,6 @@ struct mob_arena_phaseAI : public ScriptedAI
     
     void EnterEvadeMode()
     {
-        if (!_EnterEvadeMode())
-            return;
-
         Map* pMap = me->GetMap();
         if (pMap->IsDungeon())
         {
@@ -581,7 +583,7 @@ struct mob_arena_phaseAI : public ScriptedAI
             }
         }
 
-        me->GetMotionMaster()->MoveIdle();
+        me->StopMoving();
         Reset();
     }
 
