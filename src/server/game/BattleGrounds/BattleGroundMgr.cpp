@@ -48,6 +48,7 @@
 #include "ProgressBar.h"
 #include "SharedDefines.h"
 #include "Formulas.h"
+#include "DisableMgr.h"
 
 /*********************************************************/
 /***            BATTLEGROUND QUEUE SYSTEM              ***/
@@ -1709,7 +1710,7 @@ void BattleGroundMgr::CreateInitialBattleGrounds()
     uint32 count = 0;
 
     //                                                       0   1                 2                 3      4      5                6              7             8            9
-    QueryResult_AutoPtr result = WorldDatabase.Query("SELECT id, MinPlayersPerTeam,MaxPlayersPerTeam,MinLvl,MaxLvl,AllianceStartLoc,AllianceStartO,HordeStartLoc,HordeStartO,honor_mod FROM battleground_template WHERE disable = 0");
+    QueryResult_AutoPtr result = WorldDatabase.Query("SELECT id, MinPlayersPerTeam,MaxPlayersPerTeam,MinLvl,MaxLvl,AllianceStartLoc,AllianceStartO,HordeStartLoc,HordeStartO,honor_mod FROM battleground_template");
 
     if (!result)
     {
@@ -1730,6 +1731,8 @@ void BattleGroundMgr::CreateInitialBattleGrounds()
         bar.step();
 
         uint32 bgTypeID_ = fields[0].GetUInt32();
+        if (sDisableMgr.IsDisabledFor(DISABLE_TYPE_BATTLEGROUND, bgTypeID_, NULL))
+            continue;
 
         // can be overwrite by values from DB
         bl = sBattlemasterListStore.LookupEntry(bgTypeID_);
