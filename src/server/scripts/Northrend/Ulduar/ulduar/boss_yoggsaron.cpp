@@ -18,8 +18,8 @@
  /* ScriptData
 SDName: Yogg-Saron
 SDAuthor: PrinceCreed
-SD%Complete: 10
-SDComments:
+SD%Complete: 25
+SDComments: Keeper's scripts completed
 EndScriptData */
 
 #include "ScriptPCH.h"
@@ -55,11 +55,28 @@ enum YoggSaron_Yells
     SAY_DEATH                                   = -1603341,
 };
 
-// Keepers
-#define GOSSIP_THORIM_IMAGE         "Help me, Thorim!"
-#define GOSSIP_FREYA_IMAGE          "Help me, Freya!"
-#define GOSSIP_MIMIRON_IMAGE        "Help me, Mimiron!"
-#define GOSSIP_HODIR_IMAGE          "Help me, Hodir!"
+enum Phases
+{
+    PHASE_NULL = 0,
+    PHASE_1,
+    PHASE_2,
+    PHASE_3
+};
+
+Phases phase;
+
+// Images of Keepers
+enum Npcs
+{
+    NPC_IMAGE_OF_FREYA                          = 33241,
+    NPC_IMAGE_OF_THORIM                         = 33242,
+    NPC_IMAGE_OF_MIMIRON                        = 33244,
+    NPC_IMAGE_OF_HODIR                          = 33213,
+    
+    NPC_SANITY_WELL                             = 33991,
+};
+
+#define GOSSIP_KEEPER_HELP                      "I need your help."
 
 enum Keepers_Yells
 {

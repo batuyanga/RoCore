@@ -65,6 +65,10 @@ enum Data64
     DATA_AERIAL_UNIT,
     DATA_MAGNETIC_CORE,
     DATA_VEZAX,
+    DATA_YS_FREYA,
+    DATA_YS_THORIM,
+    DATA_YS_MIMIRON,
+    DATA_YS_HODIR,
 };
 
 enum Data

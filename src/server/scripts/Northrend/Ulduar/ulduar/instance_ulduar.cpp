@@ -274,6 +274,14 @@ struct instance_ulduar : public InstanceData
                 return uiMagneticCore;
             case DATA_VEZAX:
                 return uiVezax;
+            case DATA_YS_FREYA:
+                return uiFreyaYS;
+            case DATA_YS_THORIM:
+                return uiThorimYS;
+            case DATA_YS_MIMIRON:
+                return uiMimironYS;
+            case DATA_YS_HODIR:
+                return uiHodirYS;
         }
         return 0;
     }
