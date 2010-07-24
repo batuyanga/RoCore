@@ -94,6 +94,10 @@ struct instance_ulduar : public InstanceData
     uint64 uiThorimImage;
     uint64 uiMimironImage;
     uint64 uiHodirImage;
+    uint64 uiFreyaYS;
+    uint64 uiThorimYS;
+    uint64 uiMimironYS;
+    uint64 uiHodirYS;
 
     GameObject* pLeviathanDoor, *KologarnChest, *HodirChest, *HodirRareChest, *pRunicDoor, *pStoneDoor, *pThorimLever,
         *MimironTram, *MimironElevator;
@@ -165,6 +169,10 @@ struct instance_ulduar : public InstanceData
             case 33670: uiAerialUnit = pCreature->GetGUID(); return;
             case 34068: uiMagneticCore = pCreature->GetGUID(); return;
             case 33271: uiVezax = pCreature->GetGUID(); return;
+            case 33410: uiFreyaYS = pCreature->GetGUID(); return;
+            case 33413: uiThorimYS = pCreature->GetGUID(); return;
+            case 33412: uiMimironYS = pCreature->GetGUID(); return;
+            case 33411: uiHodirYS = pCreature->GetGUID(); return;
 
             // Keeper's Images
             case 33241: uiFreyaImage = pCreature->GetGUID();
