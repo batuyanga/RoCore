@@ -372,7 +372,8 @@ struct boss_sindragosaAI : public ScriptedAI
         me->GetMotionMaster()->MovePoint(0, SpawnPosition);
         me->SetFlying(false);
         me->SetReactState(REACT_AGGRESSIVE);
-        //me->GetMotionMaster()->MoveChase(me->getVictim());
+        me->RemoveAllAuras();
+        me->GetMotionMaster()->MoveChase(me->getVictim());
 
         m_uiPhaseTimer = 60000;
     }
