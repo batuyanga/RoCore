@@ -133,7 +133,6 @@ set(game_STAT_SRCS
   Scripting/ScriptLoader.cpp
   Scripting/ScriptMgr.cpp
   Scripting/ScriptSystem.cpp
-  Scripting/sc_boss_spell_worker.cpp
   Server/Protocol/Handlers/AddonHandler.cpp
   Server/Protocol/Handlers/ArenaTeamHandler.cpp
   Server/Protocol/Handlers/AuctionHouseHandler.cpp

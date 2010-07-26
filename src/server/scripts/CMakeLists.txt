@@ -28,7 +28,6 @@ set(scripts_STAT_SRCS
   ../game/AI/ScriptedAI/ScriptedFollowerAI.cpp
   ../game/AI/ScriptedAI/ScriptedGuardAI.cpp
   ../game/AI/ScriptedAI/ScriptedSimpleAI.cpp
-  ../game/Scripting/sc_boss_spell_worker.cpp
   Custom/on_events.cpp
   ${scripts_easternkingdoms}
   ${scripts_kalimdor}
