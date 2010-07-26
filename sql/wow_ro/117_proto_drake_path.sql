@@ -5,7 +5,7 @@ DELETE FROM `creature` WHERE `id`=32491;
 INSERT INTO `creature` (`guid`, `id`, `map`, `spawnMask`, `phaseMask`, `modelid`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, `spawndist`, `currentwaypoint`, `curhealth`, `curmana`, `DeathState`, `MovementType`) VALUES 
 (5491004, 32491, 571, 1, 1, 0, 0, 7537.36, -854.089, 982.299, 3.19715, 86400, 0, 0, 18900, 0, 0, 2); -- respawn 24h
 
-UPDATE `creature_template` SET `speed_walk`=2, `speed_run`=2 where `entry`=32491; --velocità leggermente aumentata (100%)
+UPDATE `creature_template` SET `speed_walk`=2, `speed_run`=2 where `entry`=32491;
 
 DELETE FROM `creature_addon` WHERE `guid`=5491004;
 INSERT INTO `creature_addon` (`guid`,`path_id`) VALUES (5491004,54910040);
