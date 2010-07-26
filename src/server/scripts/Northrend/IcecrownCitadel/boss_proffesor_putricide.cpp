@@ -48,6 +48,7 @@ enum ProfessorSpells
     SPELL_MUTATED_STRENGTH        = 71603,
     SPELL_MUTATED_PLAGUE          = 72672,
     SPELL_OOZE_THROW              = 70342, // is triggered spell - SPELL_SUMMON_PUDDLE
+    SPELL_ROOT                    = 42716,
 //
     SPELL_GREEN_BOTTLE_0          = 71826,
     SPELL_ORANGE_BOTTLE_0         = 71827,
@@ -132,6 +133,7 @@ struct boss_professor_putricideAI : public ScriptedAI
 
     void Reset()
     {
+        me->RemoveAllAuras();
         m_uiPhase = 1;
         m_uiUnstableExperimentTimer = 10000;
         m_uiAddSpawnTimer = 60000;
@@ -190,7 +192,7 @@ struct boss_professor_putricideAI : public ScriptedAI
 
         if (m_uiAddSpawnTimer < uiDiff)
         {
-            switch(urand(0, 1))
+            switch (rand() % 2)
             {
             case 0:
                 me->SummonCreature(SUMMON_GASCLOUD, UR_X, UR_Y, SPAWN_Z, 0, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 9999999);
@@ -243,7 +245,7 @@ struct boss_professor_putricideAI : public ScriptedAI
             {
                 Unit* pTarget = SelectUnit(SELECT_TARGET_RANDOM, 0);
                                 DoCast(pTarget, SPELL_THROW_BOTTLE_3);
-                switch(urand(0, 1))
+                switch (rand() % 2)
                 {
                 case 0:
                     me->SummonCreature(SUMMON_CHOKE, me->GetPositionX()+10, me->GetPositionY()+10, me->GetPositionZ(), 0, TEMPSUMMON_TIMED_OR_CORPSE_DESPAWN, 23000);
@@ -264,32 +266,36 @@ struct boss_professor_putricideAI : public ScriptedAI
             {
                 DoScriptText(SAY_AIRLOCK, me);
                     Unit* pTarget = SelectUnit(SELECT_TARGET_RANDOM, 1);
-
+                    DoCast(pTarget, SPELL_MALLEABLE_GOO);
                     m_uiGooTimer = 37000;
             } else m_uiGooTimer -= uiDiff;
 
     if (HealthBelowPct(35) && !m_bIsPhase2)
         {
                 DoScriptText(SAY_TRANSFORM_2, me);
-                if (me->GetDisplayId() != VIEW_3)
-                    me->SetDisplayId(VIEW_3);
-                DoCastAOE(SPELL_TEAR_GAS);
+                DoCast(SPELL_TEAR_GAS);
                 DoCast(SPELL_GUZZLE_POTIONS);
-                DoCast(SPELL_MUTATED_STRENGTH);
                 m_uiPhase = 3;
                 m_bIsPhase2 = true;
                 m_uiPuddleTimer = 8000;
                 m_uiUnboundTimer = 51000;
+                m_uiChangeTimer = 10000;
     }
 
         if (m_uiPhase == 3)
         {
             if (m_uiPuddleTimer < uiDiff)
             {
-                Unit* pTarget = SelectUnit(SELECT_TARGET_RANDOM, 0);
+                Unit* pTarget = SelectUnit(SELECT_TARGET_RANDOM, 1);
                 DoCast(pTarget, SPELL_SLIME_PUDDLE);
-                m_uiPuddleTimer = 2000;
+                me->SummonCreature(SUMMON_OOZE_PUDDLE, me->GetPositionX(), me->GetPositionY(), me->GetPositionZ(), 0, TEMPSUMMON_TIMED_OR_CORPSE_DESPAWN, 120000);
+                m_uiPuddleTimer = 4000;
             } else m_uiPuddleTimer -= uiDiff;
+
+            if (m_uiChangeTimer < uiDiff)
+            {
+                    me->SetDisplayId(VIEW_3);
+            } else m_uiChangeTimer -= uiDiff;
 
             if (m_uiUnboundTimer <= uiDiff)
             {
@@ -329,9 +335,9 @@ struct npc_volatile_oozeAI : public ScriptedAI
     void Reset()
     {
         TargetGUID = 0;
-        OozeAdhesivTimer = 35000;
-        OozeExplosion = 30000;
-        MovechaseTimer = 999999;
+        OozeAdhesivTimer = 7000;
+        OozeExplosionTimer = 5000;
+        MovechaseTimer = 2000;
     }
 
     void UpdateAI(const uint32 diff)
@@ -346,9 +352,9 @@ struct npc_volatile_oozeAI : public ScriptedAI
                 uint32 count = RAID_MODE(1,1,1,3);
                 for (uint8 i = 1; i <= count; i++)
                 {
-                    Unit* pTarget = SelectUnit(SELECT_TARGET_RANDOM, 1);
+                    Unit* pTarget = SelectUnit(SELECT_TARGET_RANDOM, 0);
                     DoCast(pTarget, SPELL_OOZE_ADHESIVE);
-                    OozeAdhesivTimer = 65000;
+                    OozeAdhesivTimer = 5000;
                     MovechaseTimer = 10000;
                 }
             } else OozeAdhesivTimer -= diff;
@@ -356,17 +362,92 @@ struct npc_volatile_oozeAI : public ScriptedAI
 
         if (MovechaseTimer < diff)
         {
-            MovechaseTimer = 2000;
+            Unit* pTarget = SelectTarget(SELECT_TARGET_RANDOM, 0);
+            me->AddThreat(pTarget, 500000.0f);
+            me->GetMotionMaster()->MoveChase(pTarget);
+            MovechaseTimer = 30000;
         }
         else MovechaseTimer -= diff;
 
 
-        if (OozeAdhesivTimer < diff)
+        if (OozeExplosionTimer < diff)
         {
-            if (me->IsWithinDistInMap(me, 3))
-                DoCast(me, SPELL_OOZE_ERUPTION);
-                OozeAdhesivTimer = 10000;
-        } else OozeAdhesivTimer -= diff;
+            if (me->IsWithinDistInMap(me, 3.00f))
+            {
+                Unit* pTarget = SelectTarget(SELECT_TARGET_RANDOM, 0);
+                !pTarget->HasAura(SPELL_OOZE_ADHESIVE)
+                DoCast(SPELL_OOZE_ERUPTION);
+                OozeAdhesivTimer = 1000;
+                me->ForcedDespawn();
+              }
+        } else OozeExplosionTimer -= diff;
+    }
+};
+struct npc_gas_cloudAI : public ScriptedAI
+{
+    npc_gas_cloudAI(Creature *pCreature) : ScriptedAI(pCreature)
+    {
+        me->ApplySpellImmune(0, IMMUNITY_ID, SPELL_OOZE_ADHESIVE, true);
+    }
+
+    uint64 TargetGUID;
+
+    uint32 OozeAdhesivTimer;
+    uint32 OozeExplosion;
+    uint32 MovechaseTimer;
+
+    void EnterCombat(Unit *who)
+    {
+        DoZoneInCombat();
+    }
+
+    void Reset()
+    {
+        TargetGUID = 0;
+        GasTimer = 7000;
+        BloatTimer = 1000;
+        Move2chaseTimer = 2000;
+    }
+
+    void UpdateAI(const uint32 diff)
+    {
+        if (!UpdateVictim())
+            return;
+
+
+            if (BloatTimer < diff)
+            {
+                uint32 count = RAID_MODE(1,1,1,3);
+                for (uint8 i = 1; i <= count; i++)
+                {
+                    Unit* pTarget = SelectUnit(SELECT_TARGET_RANDOM, 0);
+                    DoCast(pTarget, SPELL_GASEOUS_BLOAT);
+                    BloatTimer = 5000;
+                }
+            } else BloatTimer -= diff;
+
+
+        if (Move2chaseTimer < diff)
+        {
+            Unit* pTarget = SelectTarget(SELECT_TARGET_RANDOM, 0);
+            me->AddThreat(pTarget, 500000.0f);
+            me->GetMotionMaster()->MoveChase(pTarget);
+            Move2chaseTimer = 30000;
+        }
+        else Move2chaseTimer -= diff;
+
+
+        if (GasTimer < diff)
+        {
+            if (me->IsWithinDistInMap(me, 3.00f))
+            {
+                Unit* pTarget = SelectTarget(SELECT_TARGET_RANDOM, 0);
+                !pTarget->HasAura(SPELL_GASEOUS_BLOAT);
+                DoCast(SPELL_EXPUNGED_GAS);
+                GasTimer = 1000;
+                me->ForcedDespawn();
+            }
+        } else GasTimer -= diff;
     }
 };
 struct npc_choke_bombAI : public ScriptedAI
@@ -384,6 +465,8 @@ struct npc_choke_bombAI : public ScriptedAI
         me->SetReactState(REACT_PASSIVE);
         m_uiChokeTimer = 1000;
         m_uiExplodeDespawn = 20000;
+        if (!me->HasAura(SPELL_ROOT))
+        DoCast(me, SPELL_ROOT)
     }
     void UpdateAI(const uint32 uiDiff)
     {
@@ -413,8 +496,10 @@ struct npc_puddle_oozeAI : public ScriptedAI
     {
         me->SetReactState(REACT_PASSIVE);
         me->SetSpeed(MOVE_WALK, 0.1f, true);
-    DoCast(SPELL_SLIME_PUDDLE);
-        m_uiPuddleOozeTimer = 6000;
+        DoCast(SPELL_SLIME_PUDDLE);
+        m_uiPuddleOozeTimer = 8000;
+        if (!me->HasAura(SPELL_ROOT))
+        DoCast(me, SPELL_ROOT); 
     }
     void UpdateAI(const uint32 uiDiff)
     {
@@ -474,13 +559,13 @@ struct npc_malleable_gooAI : public ScriptedAI
     void Reset()
     {
         float x, y, z;
-        me->GetNearPoint(me, x, y, z, 1, 50, M_PI*2*rand_norm());
+        me->GetNearPoint(me, x, y, z, 1, 80, M_PI*2*rand_norm());
         me->GetMotionMaster()->MovePoint(0, x, y, z);
         DoCast(RAID_MODE(SPELL_MALLEABLE_GOO_10_NORMAL,SPELL_MALLEABLE_GOO_25_NORMAL,SPELL_MALLEABLE_GOO_10_HEROIC,SPELL_MALLEABLE_GOO_25_HEROIC));
         me->SetReactState(REACT_PASSIVE);
-        me->SetSpeed(MOVE_WALK, 0.4f, true);
-        me->SetSpeed(MOVE_RUN, 0.6f, true);
-        m_uiMalleableTimer = 19000;
+        me->SetSpeed(MOVE_WALK, 0.3f, true);
+        me->SetSpeed(MOVE_RUN, 0.3f, true);
+        m_uiDespawnTimer = 19000;
         m_uiMalleableTimer = 2000;
     }
     void UpdateAI(const uint32 uiDiff)
@@ -497,6 +582,10 @@ struct npc_malleable_gooAI : public ScriptedAI
         } m_uiDespawnTimer -= uiDiff;
     }
 };
+CreatureAI* GetAI_npc_gas_cloud(Creature* pCreature)
+{
+    return new npc_gas_cloudAI(pCreature);
+}
 CreatureAI* GetAI_npc_abomination(Creature* pCreature)
 {
     return new npc_abominationAI(pCreature);
@@ -555,5 +644,10 @@ void AddSC_boss_professor_putricide()
     NewScript = new Script;
     NewScript->Name = "npc_abomination";
     NewScript->GetAI = &GetAI_npc_abomination;
+    NewScript->RegisterSelf();
+
+    NewScript = new Script;
+    NewScript->Name = "npc_gas_cloud";
+    NewScript->GetAI = &GetAI_npc_gas_cloud;
     NewScript->RegisterSelf();
 };
