@@ -127,6 +127,7 @@ struct boss_professor_putricideAI : public ScriptedAI
     uint32 m_uiBombtimer;
     uint32 m_uiPuddleTimer;
     uint32 m_uiUnboundTimer;
+    uint32 m_uiChangeTimer;
 
     bool m_bIsPhase1;
     bool m_bIsPhase2;
@@ -324,7 +325,7 @@ struct npc_volatile_oozeAI : public ScriptedAI
     uint64 TargetGUID;
 
     uint32 OozeAdhesivTimer;
-    uint32 OozeExplosion;
+    uint32 OozeExplosionTimer;
     uint32 MovechaseTimer;
 
     void EnterCombat(Unit *who)
@@ -375,8 +376,8 @@ struct npc_volatile_oozeAI : public ScriptedAI
             if (me->IsWithinDistInMap(me, 3.00f))
             {
                 Unit* pTarget = SelectTarget(SELECT_TARGET_RANDOM, 0);
-                !pTarget->HasAura(SPELL_OOZE_ADHESIVE)
-                DoCast(SPELL_OOZE_ERUPTION);
+                if (!pTarget->HasAura(SPELL_OOZE_ADHESIVE))
+                      DoCast(SPELL_OOZE_ERUPTION);
                 OozeAdhesivTimer = 1000;
                 me->ForcedDespawn();
               }
@@ -394,7 +395,9 @@ struct npc_gas_cloudAI : public ScriptedAI
 
     uint32 OozeAdhesivTimer;
     uint32 OozeExplosion;
-    uint32 MovechaseTimer;
+    uint32 Move2chaseTimer;
+    uint32 GasTimer;
+    uint32 BloatTimer;
 
     void EnterCombat(Unit *who)
     {
@@ -466,7 +469,7 @@ struct npc_choke_bombAI : public ScriptedAI
         m_uiChokeTimer = 1000;
         m_uiExplodeDespawn = 20000;
         if (!me->HasAura(SPELL_ROOT))
-        DoCast(me, SPELL_ROOT)
+             DoCast(me, SPELL_ROOT);
     }
     void UpdateAI(const uint32 uiDiff)
     {
