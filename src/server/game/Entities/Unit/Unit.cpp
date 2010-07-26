@@ -11112,7 +11112,7 @@ bool Unit::IsImmunedToDamage(SpellEntry const* spellInfo)
         //If m_immuneToSchool type contain this school type, IMMUNE damage.
         SpellImmuneList const& schoolList = m_spellImmune[IMMUNITY_SCHOOL];
         for (SpellImmuneList::const_iterator itr = schoolList.begin(); itr != schoolList.end(); ++itr)
-            if (itr->type & shoolMask &&!IsDispelableBySpell(spellInfo, itr->spellId))
+            if (itr->type & shoolMask && !CanSpellPierceImmuneAura(spellInfo, sSpellStore.LookupEntry(itr->spellId)))
                 return true;
     }
 
@@ -11170,7 +11170,7 @@ bool Unit::IsImmunedToSpell(SpellEntry const* spellInfo)
         for (SpellImmuneList::const_iterator itr = schoolList.begin(); itr != schoolList.end(); ++itr)
             if ((itr->type & GetSpellSchoolMask(spellInfo))
                 && !(IsPositiveSpell(itr->spellId) && IsPositiveSpell(spellInfo->Id))
-                && !IsDispelableBySpell(spellInfo, itr->spellId))
+                && !CanSpellPierceImmuneAura(spellInfo, sSpellStore.LookupEntry(itr->spellId)))
                 return true;
     }
 
