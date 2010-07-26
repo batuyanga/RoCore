@@ -275,7 +275,6 @@ struct boss_rotfaceAI : public ScriptedAI
                     //and if second ooze is little
                     if (little2)
                     {
-                        ooze2->ForcedDespawn();
                         ooze->CastSpell(ooze, SPELL_UNSTABLE_OOZE, false);
 
                         if (ooze->GetAura(SPELL_UNSTABLE_OOZE) && ooze->GetAura(SPELL_UNSTABLE_OOZE)->GetStackAmount() >= 5)
@@ -303,7 +302,6 @@ struct boss_rotfaceAI : public ScriptedAI
                         }
                         else
                         {
-                            ooze2->ForcedDespawn();
                             ooze->CastSpell(ooze, SPELL_UNSTABLE_OOZE, false);
 
                             if (ooze->GetAura(SPELL_UNSTABLE_OOZE) && ooze->GetAura(SPELL_UNSTABLE_OOZE)->GetStackAmount() >= 5)
@@ -318,13 +316,10 @@ struct boss_rotfaceAI : public ScriptedAI
                     if (little2) //and second ooze is little, despawn both and summon big ooze
                     {
                         DoSummon(CREATURE_OOZE_BIG, (*ooze));
-                        ooze->ForcedDespawn();
-                        ooze2->ForcedDespawn();
                         break;
                     }
                     else
                     {
-                        ooze->ForcedDespawn();
                         ooze2->CastSpell(ooze, SPELL_UNSTABLE_OOZE, false);
 
                         if (ooze2->GetAura(SPELL_UNSTABLE_OOZE) && ooze2->GetAura(SPELL_UNSTABLE_OOZE)->GetStackAmount() >= 5)
@@ -480,7 +475,7 @@ struct npc_flood_oozeAI : public ScriptedAI
     {
         if(m_uiFloodOozeTimer <= uiDiff)
         {
-        DoCast(SPELL_OOZE_FLOOD);
+        DoCast(SPELL_OOZE_FLOOD_1);
             m_uiFloodOozeTimer = 26000;
         } else m_uiFloodOozeTimer -= uiDiff;
 
