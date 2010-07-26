@@ -691,6 +691,7 @@ struct lanathel_introAI : public ScriptedAI
     void Reset()
     {
         me->SetReactState(REACT_PASSIVE);
+        me->SetFlying(true);
     }
 
     void UpdateAI(const uint32 diff)
