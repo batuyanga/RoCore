@@ -1273,13 +1273,12 @@ void Player::Update(uint32 p_time)
     // If this is set during update SetSpellModTakingSpell call is missing somewhere in the code
     // Having this would prevent more aura charges to be dropped, so let's crash
     //assert (!m_spellModTakingSpell);
-    if (/*m_pad ||*/ m_spellModTakingSpell)
+    if ( m_spellModTakingSpell)
     {
         //sLog.outCrash("Player has m_pad %u during update!", m_pad);
         //if (m_spellModTakingSpell)
-            sLog.outCrash("Player has m_spellModTakingSpell %u during update!", m_spellModTakingSpell->m_spellInfo->Id);
-            return;
-        //m_spellModTakingSpell = NULL;
+        sLog.outCrash("Player has m_spellModTakingSpell %u during update!", m_spellModTakingSpell->m_spellInfo->Id);
+        m_spellModTakingSpell = NULL;
     }
 
     //used to implement delayed far teleports
@@ -5596,7 +5595,7 @@ void Player::SetRegularAttackTime()
 {
     for (uint8 i = 0; i < MAX_ATTACK; ++i)
     {
-        Item *tmpitem = GetWeaponForAttack(WeaponAttackType(i));
+        Item *tmpitem = GetWeaponForAttack(WeaponAttackType(i), true);
         if (tmpitem && !tmpitem->IsBroken())
         {
             ItemPrototype const *proto = tmpitem->GetProto();
@@ -7687,7 +7686,7 @@ void Player::_ApplyWeaponDependentAuraCritMod(Item *item, WeaponAttackType attac
 void Player::_ApplyWeaponDependentAuraDamageMod(Item *item, WeaponAttackType attackType, AuraEffect const* aura, bool apply)
 {
     //don't apply mod if item is broken
-    if (item->IsBroken())
+    if (item->IsBroken() || !CanUseAttackType(attackType))
         return;
 
     // ignore spell mods for not wands
@@ -7796,7 +7795,7 @@ void Player::UpdateEquipSpellsAtFormChange()
 {
     for (uint8 i = 0; i < INVENTORY_SLOT_BAG_END; ++i)
     {
-        if (m_items[i] && !m_items[i]->IsBroken())
+        if (m_items[i] && !m_items[i]->IsBroken() && CanUseAttackType(GetAttackBySlot(i)))
         {
             ApplyItemEquipSpell(m_items[i],false,true);     // remove spells that not fit to form
             ApplyItemEquipSpell(m_items[i],true,true);      // add spells that fit form but not active
@@ -7830,7 +7829,7 @@ void Player::CastItemCombatSpell(Unit *target, WeaponAttackType attType, uint32 
     {
         // If usable, try to cast item spell
         if (Item * item = GetItemByPos(INVENTORY_SLOT_BAG_0,i))
-            if (!item->IsBroken())
+            if (!item->IsBroken() && CanUseAttackType(attType))
                 if (ItemPrototype const *proto = item->GetProto())
                 {
                     // Additional check for weapons
@@ -8080,7 +8079,7 @@ void Player::_RemoveAllItemMods()
             if (proto->ItemSet)
                 RemoveItemsSetItem(this,proto);
 
-            if (m_items[i]->IsBroken())
+            if (m_items[i]->IsBroken() || !CanUseAttackType(GetAttackBySlot(i)))
                 continue;
 
             ApplyItemEquipSpell(m_items[i], false);
@@ -8092,7 +8091,7 @@ void Player::_RemoveAllItemMods()
     {
         if (m_items[i])
         {
-            if (m_items[i]->IsBroken())
+            if (m_items[i]->IsBroken() || !CanUseAttackType(GetAttackBySlot(i)))
                 continue;
             ItemPrototype const *proto = m_items[i]->GetProto();
             if (!proto)
@@ -8120,7 +8119,7 @@ void Player::_ApplyAllItemMods()
     {
         if (m_items[i])
         {
-            if (m_items[i]->IsBroken())
+            if (m_items[i]->IsBroken() || !CanUseAttackType(GetAttackBySlot(i)))
                 continue;
 
             ItemPrototype const *proto = m_items[i]->GetProto();
@@ -8150,7 +8149,7 @@ void Player::_ApplyAllItemMods()
             if (proto->ItemSet)
                 AddItemsSetItem(this,m_items[i]);
 
-            if (m_items[i]->IsBroken())
+            if (m_items[i]->IsBroken() || !CanUseAttackType(GetAttackBySlot(i)))
                 continue;
 
             ApplyItemEquipSpell(m_items[i],true);
@@ -8167,7 +8166,7 @@ void Player::_ApplyAllLevelScaleItemMods(bool apply)
     {
         if (m_items[i])
         {
-            if (m_items[i]->IsBroken())
+            if (m_items[i]->IsBroken() || !CanUseAttackType(GetAttackBySlot(i)))
                 continue;
 
             ItemPrototype const *proto = m_items[i]->GetProto();
@@ -9629,7 +9628,11 @@ Item* Player::GetWeaponForAttack(WeaponAttackType attackType, bool useable /*= f
         default: return NULL;
     }
 
-    Item* item = GetUseableItemByPos(INVENTORY_SLOT_BAG_0, slot);
+    Item* item = NULL;
+    if (useable)
+        GetUseableItemByPos(INVENTORY_SLOT_BAG_0, slot);
+    else
+        GetItemByPos(INVENTORY_SLOT_BAG_0, slot);
     if (!item || item->GetProto()->Class != ITEM_CLASS_WEAPON)
         return NULL;
 
@@ -9644,7 +9647,11 @@ Item* Player::GetWeaponForAttack(WeaponAttackType attackType, bool useable /*= f
 
 Item* Player::GetShield(bool useable) const
 {
-    Item* item = GetUseableItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND);
+    Item* item = NULL;
+    if (useable)
+        GetUseableItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND);
+    else
+        GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND);
     if (!item || item->GetProto()->Class != ITEM_CLASS_ARMOR)
         return NULL;
 
