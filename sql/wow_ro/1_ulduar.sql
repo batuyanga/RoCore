@@ -1384,3 +1384,4 @@ UPDATE `creature_template` SET `ScriptName` = 'boss_elder_stonebark' WHERE `entr
 UPDATE `creature_template` SET `ScriptName` = 'boss_elder_brightleaf' WHERE `entry` =32195;
 UPDATE `creature_template` SET `ScriptName` = 'creature_iron_roots' WHERE `entry` =33088;
 UPDATE `creature_template` SET `ScriptName` = 'creature_sun_beam' WHERE `entry` =33170;
+UPDATE creature_template SET npcflag = 1 WHERE entry = 33686;
