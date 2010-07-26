@@ -1299,8 +1299,11 @@ struct boss_aerial_unitAI : public BossAI
                         events.CancelEvent(EVENT_REACTIVATE_AERIAL);
                         break;
                     case EVENT_SUMMON_BOTS:
-                        spawnAdd();
-                        events.RescheduleEvent(EVENT_SUMMON_BOTS, 10000, 0, PHASE_AERIAL_SOLO);
+                        if (phase == PHASE_AERIAL_SOLO)
+                        {
+                            spawnAdd();
+                            events.RescheduleEvent(EVENT_SUMMON_BOTS, 10000, 0, PHASE_AERIAL_SOLO);
+                        }
                     break;
                 }
             }
