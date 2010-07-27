@@ -18625,7 +18625,7 @@ Pet* Player::GetPet() const
         if (!IS_PET_GUID(pet_guid))
             return NULL;
 
-        Pet* pet = ObjectAccessor::GetPet(pet_guid);
+        Pet* pet = ObjectAccessor::GetPet(*this, pet_guid);
 
         if (!pet)
             return NULL;

@@ -1497,7 +1497,7 @@ class Unit : public WorldObject
 
         Player* GetSpellModOwner() const;
 
-        Unit* GetOwner(bool inWorld = true) const;
+        Unit* GetOwner() const;
         Guardian *GetGuardianPet() const;
         Minion *GetFirstMinion() const;
         Unit* GetCharmer() const;
