@@ -573,6 +573,22 @@ void Creature::Update(uint32 diff)
             else
                 RegenerateMana();
 
+            if (getPowerType() == POWER_ENERGY)
+            {
+                if (!IsVehicle() || GetVehicleKit()->GetVehicleInfo()->m_powerType != POWER_OOZE)
+                    Regenerate(POWER_ENERGY);
+            }
+            else
+                RegenerateMana();
+
+            if (getPowerType() == POWER_ENERGY)
+            {
+                if (!IsVehicle() || GetVehicleKit()->GetVehicleInfo()->m_powerType != POWER_BLOOD_POWER)
+                    Regenerate(POWER_ENERGY);
+            }
+            else
+                RegenerateMana();
+
             /*if (!bIsPolymorphed) // only increase the timer if not polymorphed
                     m_regenTimer += CREATURE_REGEN_INTERVAL - diff;
             }
