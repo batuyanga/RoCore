@@ -675,14 +675,6 @@
 				Name="System"
 				>
 				<File
-					RelativePath="..\..\src\server\game\Scripting\sc_boss_spell_worker.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\server\game\Scripting\sc_boss_spell_worker.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\src\server\game\Scripting\ScriptLoader.cpp"
 					>
 				</File>
