@@ -1881,7 +1881,7 @@ void AchievementMgr::CompletedAchievement(AchievementEntry const* achievement, b
 
     /* WowArmory Feed Log */
     GetPlayer()->WriteWowArmoryDatabaseLog(1, achievement->ID);
-	SendAchievementEarned(achievement);
+    SendAchievementEarned(achievement);
     CompletedAchievementData& ca =  m_completedAchievements[achievement->ID];
     ca.date = time(NULL);
     ca.changed = true;

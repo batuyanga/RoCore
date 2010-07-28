@@ -686,6 +686,8 @@ uint32 Unit::DealDamage(Unit *pVictim, uint32 damage, CleanDamage const* cleanDa
             {
                 // FIXME: kept by compatibility. don't know in BG if the restriction apply.
                 bg->UpdatePlayerScore(killer, SCORE_DAMAGE_DONE, damage);
+                if (BattleGround * bgV = pVictim->ToPlayer()->GetBattleGround())
+                    bgV->UpdatePlayerScore(pVictim->ToPlayer(), SCORE_DAMAGE_TAKEN, damage);
             }
         }
 
@@ -9784,6 +9786,9 @@ int32 Unit::DealHeal(Unit *pVictim, uint32 addhealth, SpellEntry const *spellPro
 
     if (pVictim->GetTypeId() == TYPEID_PLAYER)
     {
+        /* WoWArmory (arena game chart) */
+        if (BattleGround *bgV = pVictim->ToPlayer()->GetBattleGround())
+            bgV->UpdatePlayerScore(pVictim->ToPlayer(), SCORE_HEALING_TAKEN, gain);
         pVictim->ToPlayer()->GetAchievementMgr().UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_TOTAL_HEALING_RECEIVED, gain);
         pVictim->ToPlayer()->GetAchievementMgr().UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_HIGHEST_HEALING_RECEIVED, addhealth);
     }
@@ -15071,8 +15076,9 @@ void Unit::Kill(Unit *pVictim, bool durabilityLoss)
                 {
                     if (creature->GetCreatureInfo()->flags_extra & CREATURE_FLAG_EXTRA_INSTANCE_BIND)
 					{
-                        creditedPlayer->WriteWowArmoryDatabaseLog(3, creature->GetCreatureInfo()->Entry);
                         ((InstanceMap *)m)->PermBindAllPlayers(creditedPlayer);
+                        creditedPlayer->WriteWowArmoryDatabaseLog(3, creature->GetCreatureInfo()->Entry);
+
                     }
                 }
                 else

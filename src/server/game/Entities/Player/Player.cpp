@@ -17756,7 +17756,7 @@ void Player::SaveToDB()
 
     std::string sql_name = m_name;
     CharacterDatabase.escape_string(sql_name);
-
+    
     CharacterDatabase.BeginTransaction();
 	
 	/* WoWArmory */
