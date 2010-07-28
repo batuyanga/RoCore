@@ -287,7 +287,7 @@ struct boss_professor_putricideAI : public ScriptedAI
         {
             if (m_uiPuddleTimer < uiDiff)
             {
-                Unit* pTarget = SelectUnit(SELECT_TARGET_RANDOM, 1);
+                Unit* pTarget = SelectUnit(SELECT_TARGET_RANDOM, 0);
                 DoCast(pTarget, SPELL_SLIME_PUDDLE);
                 me->SummonCreature(SUMMON_OOZE_PUDDLE, me->GetPositionX(), me->GetPositionY(), me->GetPositionZ(), 0, TEMPSUMMON_TIMED_OR_CORPSE_DESPAWN, 120000);
                 m_uiPuddleTimer = 4000;
@@ -520,6 +520,8 @@ struct npc_abominationAI : public ScriptedAI
         m_pInstance = pCreature->GetInstanceData();
         pAbomination = me;
         assert(vehicle);
+        me->SetPower(POWER_OOZE, 0);
+        me->SetPower(me->getPowerType(POWER_OOZE), 0);
     }
     ScriptedInstance* m_pInstance;
 
