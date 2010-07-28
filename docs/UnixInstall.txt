@@ -35,7 +35,7 @@ the directory and cmake and make. E.G. you created a dir named build ad want to 
     cd RoCore
     mkdir build
     cd build
-    cmake ../wow/ -DPREFIX=/opt/trinity -DDO_DEBUG=1 -DCMAKE_C_FLAGS="-m32 -D_LARGEFILE_SOURCE -DFD_SETSIZE=131072 -march=prescott -ggdb3 -g3 -pipe -fno-strength-reduce -fno-delete-null-pointer-checks -fno-strict-aliasing -frename-registers"
+    cmake ../ -DPREFIX=/opt/trinity -DDEBUG=1 -DCMAKE_C_FLAGS="-m32 -D_LARGEFILE_SOURCE -DFD_SETSIZE=131072 -march=prescott -ggdb3 -g3 -pipe -fno-strength-reduce -fno-delete-null-pointer-checks -fno-strict-aliasing -frename-registers"
     make
 
 Before installing the server to /opt/trinity you must be sure that nor authserver, nor worldserver are running, so you must kill their processes (restarter).
