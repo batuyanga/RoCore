@@ -111,7 +111,8 @@ struct boss_saurfangAI : public ScriptedAI
         if (m_pInstance)
             m_pInstance->SetData(DATA_SAURFANG, NOT_STARTED);
 
-        me->SetPower(me->getPowerType(), 0);
+        me->SetPower(POWER_BLOOD_POWER, 1);
+        me->SetPower(me->getPowerType(POWER_BLOOD_POWER), 0);
         me->RemoveAllAuras();
 
         DoCast(me, SPELL_ZERO_POWER);
@@ -315,6 +316,7 @@ struct npc_bloodbeastAI : public ScriptedAI
                 DoCast(me, SPELL_SCENT_OF_BLOOD);
                 ScentOfBlood = true;
                 m_uiScentOfBloodTimer = 9000;
+                pSaurfang->ModifyPower(pSaurfang->getPowerType(POWER_BLOOD_POWER), +1);
             }
         } else m_uiScentOfBloodTimer -= uiDiff;
      }
