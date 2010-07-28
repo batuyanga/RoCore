@@ -520,8 +520,8 @@ struct npc_abominationAI : public ScriptedAI
         m_pInstance = pCreature->GetInstanceData();
         pAbomination = me;
         assert(vehicle);
-        me->SetPower(POWER_OOZE, 0);
-        me->SetPower(me->getPowerType(POWER_OOZE), 0);
+//        me->SetPower(POWER_OOZE, 0);
+//        me->SetPower(me->getPowerType(POWER_OOZE), 0);
     }
     ScriptedInstance* m_pInstance;
 
