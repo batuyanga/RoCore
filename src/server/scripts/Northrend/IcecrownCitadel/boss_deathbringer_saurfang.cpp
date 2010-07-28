@@ -81,11 +81,14 @@ enum Achievements
     ACHIEV_MESS_25               = 4613,
 };
 
+Creature* pSaurfang;
+
 struct boss_saurfangAI : public ScriptedAI
 {
     boss_saurfangAI(Creature* pCreature) : ScriptedAI(pCreature)
     {
         m_pInstance = pCreature->GetInstanceData();
+        pSaurfang = me;
     }
 
     ScriptedInstance* m_pInstance;
