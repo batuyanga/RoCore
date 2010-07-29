@@ -61,7 +61,10 @@ UPDATE `creature_template` SET `ScriptName`='Mob_FireTrigger' WHERE `entry`=3478
 UPDATE `creature_template` SET `ScriptName`='Mob_Netherportal' WHERE `entry`=34825;
 UPDATE `creature_template` SET `scale`='2' WHERE `entry`=34825;
 UPDATE `creature_template` SET `ScriptName`='Mob_MistressOfPain' WHERE `entry`=34826;
-INSERT INTO `creature_template` VALUES ('41000', '0', '0', '0', '0', '0', '169', '11686', '169', '0', 'Wilfred Portal Trigger', '', '', '0', '1', '1', '0', '14', '14', '0', '1', '1', '0', '1', '2', '0', '0', '1', '2000', '2000', '1', '0', '0', '0', '0', '0', '0', '0', '1', '2', '0', '10', '1049600', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '', '0', '3', '0.0238095', '1', '1', '0', '0', '0', '0', '0', '0', '0', '0', '1', '0', '0', '2', '', '', '11159');
+
+-- correct little error to start core not really importants
+DELETE FROM `creature_template` WHERE `entry`=41000;
+INSERT INTO `creature_template` VALUES ('41000','0','0','0','0','0','169','11686','169','0','Wilfred Portal Trigger','','','0','81','81','0','14','14','0','1','1','0','1','2','0','0','1','2000','2000','1','1','0','0','0','0','0','0','1','2','0','10','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','1','1','1','1','0','0','0','0','0','0','0','0','1','0','0','2','0','','11159');
 
 -- Gormok
 UPDATE `creature_template` SET `ScriptName`='boss_gormok_impaler' WHERE (`entry`='34796');
@@ -88,6 +91,8 @@ UPDATE `creature_template` SET `ScriptName`='mob_swarm_scarab' WHERE (`entry`='3
 UPDATE `creature_template` SET `ScriptName`='nerubian_burrower' WHERE (`entry`='34607');
 UPDATE `creature_template` SET `ScriptName`='frost_sphere' WHERE (`entry`='34606');
 UPDATE `creature_template` SET `ScriptName`='creature_impale' WHERE (`entry`='29184');
+UPDATE `creature_template` SET `ScriptName`='cr_dark_essence' WHERE (`entry`='34567');
+UPDATE `creature_template` SET `ScriptName`='cr_light_essence' WHERE (`entry`='34568');
 
 INSERT INTO `script_texts` VALUES ('0', '-1600205', 'Welcome champions, you have heard the call of the Argent Crusade, and you have boldly answered. It is here, in the Crusader\'s Coliseum, that you will face your greatest challenges. Those of you, who survive the rigors of the coliseum will join the Argent Crusade on it\'s march to Icecrown Citadel.', null, null, 'Willkommen, Champions! Ihr habt den Ruf des Argentumkreuzzugs vernommen und seid ihm mutig gefolgt! Hier, im Kolosseum der Kreuzfahrer, werdet Ihr auf Eure größten Herausforderungen treffen.Die jenigen unter Euch, welche die Gefahren des Kolosseums überleben, werden den Kreuzzug bei seinem Marsch auf die Eiskronenzitadelle begleiten.', null, null, null, null, null, '16036', '1', '0', '0', null);
 INSERT INTO `script_texts` VALUES ('0', '-1600206', 'Hailing from the deepest, darkest carverns of the storm peaks, Gormok the Impaler! Battle on, heroes!', null, null, 'Er kommt aus den tiefsten, dunkelsten Höhlen der Sturmgifpel - Gormok der Pfähler! Voran, Helden!', null, null, null, null, null, '16038', '1', '0', '0', null);
