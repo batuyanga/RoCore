@@ -66,7 +66,7 @@ INSERT INTO `creature` (`id`,`map`,`spawnMask`,`phaseMask`,`modelid`,`equipment_
 -- 8042_boss_leviathan
 DELETE FROM `creature_template` WHERE `entry` IN (33240);
 INSERT INTO `creature_template` (`entry`, `difficulty_entry_1`, `difficulty_entry_2`, `difficulty_entry_3`, `KillCredit1`, `KillCredit2`, `modelid1`, `modelid2`, `modelid3`, `modelid4`, `name`, `subname`, `IconName`, `gossip_menu_id`, `minlevel`, `maxlevel`, `exp`, `faction_A`, `faction_H`, `npcflag`, `speed_walk`, `speed_run`, `scale`, `rank`, `mindmg`, `maxdmg`, `dmgschool`, `attackpower`, `dmg_multiplier`, `baseattacktime`, `rangeattacktime`, `unit_class`, `unit_flags`, `dynamicflags`, `family`, `trainer_type`, `trainer_spell`, `trainer_class`, `trainer_race`, `minrangedmg`, `maxrangedmg`, `rangedattackpower`, `type`, `type_flags`, `lootid`, `pickpocketloot`, `skinloot`, `resistance1`, `resistance2`, `resistance3`, `resistance4`, `resistance5`, `resistance6`, `spell1`, `spell2`, `spell3`, `spell4`, `spell5`, `spell6`, `spell7`, `spell8`, `PetSpellDataId`, `VehicleId`, `mingold`, `maxgold`, `AIName`, `MovementType`, `InhabitType`, `Health_mod`, `Mana_mod`, `Armor_mod`, `RacialLeader`, `questItem1`, `questItem2`, `questItem3`, `questItem4`, `questItem5`, `questItem6`, `movementId`, `RegenHealth`, `equipment_id`, `mechanic_immune_mask`, `flags_extra`, `ScriptName`, `WDBVerified`) VALUES('33240','33240','0','0','0','0','28517','0','0','0','Ulduar Colossus','','','0','80','80','2','1692','1692','0','1.2','1.14286','1','1','422','586','0','642','7.5','2000','0','1','32832','0','0','0','0','0','0','345','509','103','5','524352','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','','0','3','125','1','1','0','0','0','0','0','0','0','124','1','0','0','0','mob_colossus','11403');
--- ubicaciÃ³n Leviathan
+-- ubicación Leviathan
 DELETE FROM `creature` WHERE `id`=33113;
 INSERT INTO `creature` (`guid`,`id`,`map`,`spawnMask`,`phaseMask`,`modelid`,`equipment_id`,`position_x`,`position_y`,`position_z`,`orientation`,`spawntimesecs`,`spawndist`,`currentwaypoint`,`curhealth`,`curmana`,`DeathState`,`MovementType`) VALUES
 (94374, 33113, 603, 1, 1, 0, 0, 435.89, -8.417, 409.886, 3.12723, 480000, 0, 0, 23009250, 0, 0, 0);
@@ -167,7 +167,7 @@ INSERT INTO `waypoint_data` (`id`, `point`, `position_x`, `position_y`, `positio
 UPDATE `creature` SET `MovementType` = 2 WHERE `id` = 33515;
 
 -- 8137_leviathan_vehiclesystem
-UPDATE `creature_template` SET `unit_flags` = 0, `ScriptName` = 'npc_keeper_norgannon' WHERE `entry` = 33686;
+UPDATE `creature_template` SET `unit_flags` = 0, `npcflag` = 1, `ScriptName` = 'npc_keeper_norgannon' WHERE `entry` = 33686;
 DELETE FROM `creature_template` WHERE `entry`=33115;
 DELETE FROM creature WHERE `id`=33115;
 
@@ -218,7 +218,7 @@ UPDATE `creature_template` SET `mechanic_immune_mask` = 650854235 WHERE `entry` 
 UPDATE `creature_template` SET `mechanic_immune_mask` = 617299547 WHERE `entry` = 32857;
 
 UPDATE `script_texts` SET `content_default` = "Welcome, champions! All of our attempts at grounding her have failed. We could use a hand in bring her down with these harpoon guns.", `type` = 0  WHERE `entry` = -1603260;
-UPDATE `script_texts` SET `content_default` = "Move! Quickly! She wonâ€™t remain grounded for long.", `type` = 1  WHERE `entry` = -1603261;
+UPDATE `script_texts` SET `content_default` = "Move! Quickly! She won’t remain grounded for long.", `type` = 1  WHERE `entry` = -1603261;
 UPDATE `script_texts` SET `type` = 2  WHERE `entry` = -1603053;
 UPDATE `script_texts` SET `type` = 2  WHERE `entry` = -1603214;
 
@@ -1384,4 +1384,3 @@ UPDATE `creature_template` SET `ScriptName` = 'boss_elder_stonebark' WHERE `entr
 UPDATE `creature_template` SET `ScriptName` = 'boss_elder_brightleaf' WHERE `entry` =32195;
 UPDATE `creature_template` SET `ScriptName` = 'creature_iron_roots' WHERE `entry` =33088;
 UPDATE `creature_template` SET `ScriptName` = 'creature_sun_beam' WHERE `entry` =33170;
-UPDATE creature_template SET npcflag = 1 WHERE entry = 33686;
