@@ -21,7 +21,7 @@
 
 #include "OutdoorPvPImpl.h"
 
-#define ZONE_DALARAN            4395
+#define ZONE_DALARAN             4395
 #define ZONE_WINTERGRASP         4197
 #define POS_X_CENTER             5100
 #define MAX_VEHICLE_PER_WORKSHOP    4
@@ -51,11 +51,13 @@ enum OutdoorPvPWGSpell
     SPELL_DAMAGED_BUILDING                       = 59201,
     SPELL_INTACT_BUILDING                        = 59203,
 
-   SPELL_TELEPORT_DALARAN                       = 53360,
-   SPELL_VICTORY_AURA                           = 60044,
+	SPELL_TELEPORT_ALLIENCE_CAMP                 = 58632,
+	SPELL_TELEPORT_HORDE_CAMP                    = 58633,
+    SPELL_TELEPORT_FORTRESS                      = 59096,
+
+    SPELL_TELEPORT_DALARAN                       = 53360,
+    SPELL_VICTORY_AURA                           = 60044,
 };
-
-
 
 const uint16 GameEventWintergraspDefender[2] = {50, 51};
 
@@ -69,11 +71,12 @@ enum OutdoorPvP_WG_Sounds
     OutdoorPvP_WG_SOUND_NEAR_VICTORY            = 8456,
     OutdoorPvP_WG_SOUND_HORDE_WINS              = 8454,
     OutdoorPvP_WG_SOUND_ALLIANCE_WINS           = 8455,
-    OutdoorPvP_WG_SOUND_START_BATTLE            = 11803,
-    OutdoorPvP_WG_SOUND_WORKSHOP_Horde          = 6205, // âðåìÿ óáèâàòü îðäà
-    OutdoorPvP_WG_SOUND_WORKSHOP_ALLIANCE       = 6298, // ê îðóæèþ àëüÿíñ
+    OutdoorPvP_WG_SOUND_WORKSHOP_Horde          = 6205, // Ð²Ñ€ÐµÐ¼Ñ ÑƒÐ±Ð¸Ð²Ð°Ñ‚ÑŒ Ð¾Ñ€Ð´Ð°
+    OutdoorPvP_WG_SOUND_WORKSHOP_ALLIANCE       = 6298, // Ðº Ð¾Ñ€ÑƒÐ¶Ð¸ÑŽ Ð°Ð»ÑŒÑÐ½Ñ
     OutdoorPvP_WG_HORDE_CAPTAIN                 = 8333,
-    OutdoorPvP_WG_ALLIANCE_CAPTAIN              = 8232
+    OutdoorPvP_WG_ALLIANCE_CAPTAIN              = 8232,
+//    OutdoorPvP_WG_SOUND_START_BATTLE            = 11803,   //L70ETC Concert
+    OutdoorPvP_WG_SOUND_START_BATTLE            = 3439, //Standart BG Start sound
 };
 
 enum DataId
@@ -238,7 +241,7 @@ class OutdoorPvPWG : public OutdoorPvP
 
         void ModifyWorkshopCount(TeamId team, bool add);
         uint32 GetTimer() const { return m_timer / 1000; };
-        bool isWarTime() const { return m_warTime; };
+        bool isWarTime() const { return m_wartime; };
         void setTimer(uint32 timer) { if (timer >= 0) m_timer = timer; };
         uint32 GetNumPlayersA() const { return m_players[TEAM_ALLIANCE].size(); };
         uint32 GetNumPlayersH() const { return m_players[TEAM_HORDE].size(); };
@@ -254,6 +257,8 @@ class OutdoorPvPWG : public OutdoorPvP
         void RemovePlayerFromResurrectQueue(uint64 player_guid);
         void RelocateDeadPlayers(Creature *cr);
         // BG end
+        void SendInitWorldStatesTo(Player *player = NULL) const;
+        uint32 m_timer;
     protected:
         // Temporal BG specific till 3.2
         std::vector<uint64> m_ResurrectQueue;               // Player GUID
@@ -279,9 +284,8 @@ class OutdoorPvPWG : public OutdoorPvP
         TeamPairMap m_creEntryPair, m_goDisplayPair;
         QuestGiverPositionMap m_qgPosMap;
 
-        bool m_warTime;
+        bool m_wartime;
         bool m_changeDefender;
-        uint32 m_timer;
         uint32 m_clock[2];
         uint32 m_workshopCount[2];
         uint32 m_towerDestroyedCount[2];
@@ -299,7 +303,7 @@ class OutdoorPvPWG : public OutdoorPvP
         void PromotePlayer(Player *player) const;
         void UpdateTenacityStack();
         void UpdateAllWorldObject();
-        void UpdateCreatureInfo(Creature *creature);
+        bool UpdateCreatureInfo(Creature *creature);
         bool UpdateGameObjectInfo(GameObject *go) const;
 
         bool CanBuildVehicle(OPvPCapturePointWG *workshop) const;
@@ -307,7 +311,6 @@ class OutdoorPvPWG : public OutdoorPvP
 
         void RebuildAllBuildings();
 
-        void SendInitWorldStatesTo(Player *player = NULL) const;
         void RemoveOfflinePlayerWGAuras();
         void RewardMarkOfHonor(Player *player, uint32 count);
         void MoveQuestGiver(uint32 guid);

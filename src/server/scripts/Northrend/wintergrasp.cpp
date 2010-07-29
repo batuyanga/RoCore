@@ -15,7 +15,7 @@
  */
 
 #include "ScriptPCH.h"
-#include "../../game/OutdoorPvP/Zones/OutdoorPvPWG.h"
+#include "OutdoorPvPWG.h"
 
 #define GOSSIP_HELLO_DEMO1  "Build catapult."
 #define GOSSIP_HELLO_DEMO2  "Build demolisher."
@@ -50,13 +50,8 @@ bool GossipHello_npc_demolisher_engineerer(Player* pPlayer, Creature* pCreature)
 
     if(pPlayer->isGameMaster() || pCreature->GetZoneScript() && pCreature->GetZoneScript()->GetData(pCreature->GetDBTableGUIDLow()))
     {
-        if (pPlayer->HasAura(SPELL_RECRUIT))
+        if (pPlayer->HasAura(SPELL_CORPORAL))
             pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, GOSSIP_HELLO_DEMO1, GOSSIP_SENDER_MAIN,   GOSSIP_ACTION_INFO_DEF);
-        else if (pPlayer->HasAura(SPELL_CORPORAL))
-        {
-            pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, GOSSIP_HELLO_DEMO1, GOSSIP_SENDER_MAIN,   GOSSIP_ACTION_INFO_DEF);
-            pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, GOSSIP_HELLO_DEMO2, GOSSIP_SENDER_MAIN,   GOSSIP_ACTION_INFO_DEF+1);
-        }
         else if (pPlayer->HasAura(SPELL_LIEUTENANT))
         {
             pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, GOSSIP_HELLO_DEMO1, GOSSIP_SENDER_MAIN,   GOSSIP_ACTION_INFO_DEF);
