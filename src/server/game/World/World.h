@@ -529,6 +529,7 @@ class World
         ~World();
 
         WorldSession* FindSession(uint32 id) const;
+        void SendWintergraspState();
         void AddSession(WorldSession *s);
         void SendRNDBroadcast();
         bool RemoveSession(uint32 id);
@@ -697,16 +698,16 @@ class World
         static int32 GetVisibilityNotifyPeriodInInstances() { return m_visibility_notify_periodInInstances;  }
         static int32 GetVisibilityNotifyPeriodInBGArenas()  { return m_visibility_notify_periodInBGArenas;   }
 
-        void SetWintergraspTimer(uint32 timer, uint32 state)
+        void SetWintergrapsTimer(uint32 timer, uint32 state)
         {
-            m_WintergraspTimer = timer;
+            m_WintergrapsTimer = timer;
             m_WintergrapsState = state;
         }
 
-        uint32 GetWintergraspTimer() { return m_WintergraspTimer; }
+        uint32 GetWintergrapsTimer() { return m_WintergrapsTimer; }
         uint32 GetWintergrapsState() { return m_WintergrapsState; }
 
-        uint32 m_WintergraspTimer;
+        uint32 m_WintergrapsTimer;
         uint32 m_WintergrapsState;
 
         void ProcessCliCommands();
