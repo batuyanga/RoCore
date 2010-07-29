@@ -3826,14 +3826,6 @@ UPDATE `gameobject` SET `spawnMask` = '1' WHERE `gameobject`.`guid` =750007 LIMI
 UPDATE `gameobject` SET `spawnMask` = '1' WHERE `gameobject`.`guid` =750006 LIMIT 1;
 UPDATE `gameobject` SET `spawnMask` = '1' WHERE `gameobject`.`guid` =750005 LIMIT 1;
 
--- TrialOfTheChampion
--- need add fix loot
-
--- TrialOfTheCrusader
-UPDATE `creature_template` SET `unit_class` = '1',
-`type` = '0',
-`MovementType` = '1',
-`InhabitType` = '1' WHERE `creature_template`.`entry` =41000 LIMIT 1;
 
 -- Ulduar
 UPDATE `creature_addon` SET `auras` = NULL WHERE `creature_addon`.`guid` =137496 LIMIT 1;
