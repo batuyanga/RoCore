@@ -666,6 +666,14 @@
 					RelativePath="..\..\src\server\game\OutdoorPvP\Zones\OutdoorPvPZM.h"
 					>
 				</File>
+ 			        <File
+				        RelativePath="..\..\src\server\game\OutdoorPvP\Zones\OutdoorPvPWG.cpp"
+				        >
+			        </File>
+			        <File
+				        RelativePath="..\..\src\server\game\OutdoorPvP\Zones\OutdoorPvPWG.h"
+				        >
+			        </File>
 			</Filter>
 		</Filter>
 		<Filter
@@ -2205,6 +2213,10 @@
 				</File>
 				<File
 					RelativePath="..\..\src\server\scripts\Northrend\storm_peaks.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\server\scripts\Northrend\wintergrasp.cpp"
 					>
 				</File>
 				<File
