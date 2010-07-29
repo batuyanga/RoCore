@@ -598,6 +598,7 @@ bool AreaTrigger_at_RX_214_repair_o_matic_station(Player* pPlayer, const AreaTri
     {
         if (!vehicle->HasAura(SPELL_AUTO_REPAIR))
         {
+            vehicle->SetHealth(vehicle->GetMaxHealth()); // Correct spell not works
             pPlayer->CastSpell(vehicle, SPELL_AUTO_REPAIR, true);
             vehicle->ModifyHealth(vehicle->GetMaxHealth()); // Correct spell not works
         }

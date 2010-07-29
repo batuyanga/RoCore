@@ -170,7 +170,7 @@ struct boss_hodir_AI : public BossAI
                 Helper[3]->AddThreat(me, 100);
             }
                 
-        if (IsHeroic())
+        if (getDifficulty() == RAID_DIFFICULTY_25MAN_NORMAL)
         {
             if (Helper[4] = me->SummonCreature(NPC_FIELD_MEDIC_JESSY, 1976.60, -233.53, 432.767, 1.57, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 3000))
                 if (Creature *pIceBlock = me->SummonCreature(NPC_FLASH_FREEZE, Helper[4]->GetPositionX(), Helper[4]->GetPositionY(), Helper[4]->GetPositionZ(), 0, TEMPSUMMON_CORPSE_DESPAWN))

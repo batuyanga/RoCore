@@ -3666,6 +3666,9 @@ void SpellMgr::LoadSpellCustomAttr()
             break;
         case 44978: case 45001: case 45002:     // Wild Magic
         case 45004: case 45006: case 45010:     // Wild Magic
+        case 25425: case 45761: case 42611:     // Shoot
+        case 42442: // Vengeance Landing Cannonfire
+        case 45863: // Cosmetic - Incinerate to Random Target
         case 31347: // Doom
         case 41635: // Prayer of Mending
         case 44869: // Spectral Blast

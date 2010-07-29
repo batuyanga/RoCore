@@ -105,7 +105,7 @@ struct boss_auriaya_AI : public BossAI
         Sentry[0]->GetMotionMaster()->MoveFollow(me, 0.5, 1.5, MOTION_SLOT_ACTIVE);
         Sentry[1] = me->SummonCreature(SANCTUM_SENTRY, me->GetPositionX(), me->GetPositionY(), me->GetPositionZ(), 0, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 3000);
         Sentry[1]->GetMotionMaster()->MoveFollow(me, 0.5, -1.5, MOTION_SLOT_ACTIVE);
-        if (IsHeroic())
+        
         {
             Sentry[2] = me->SummonCreature(SANCTUM_SENTRY, me->GetPositionX(), me->GetPositionY(), me->GetPositionZ(), 0, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 3000);
             Sentry[2]->GetMotionMaster()->MoveFollow(me, -2.5, 1.5, MOTION_SLOT_ACTIVE);
