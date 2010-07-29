@@ -1,4 +1,4 @@
-ALTER TABLE db_version CHANGE COLUMN required_31_characters_db_version required_165_characters_armory_patch bit;
+ALTER TABLE character_db_version CHANGE COLUMN required_31_characters_db_version required_165_characters_armory_patch bit;
 
 DROP TABLE IF EXISTS `armory_character_stats`;
 CREATE TABLE `armory_character_stats` (
